@@ -1,0 +1,120 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'cloudebricks.dev'
+theme = 'kkramineni'
+DefaultContentLanguage = "en"
+enableEmoji = true
+enableGitInfo = true
+enableRobotsTXT = true
+canonifyURLs = true
+paginate = 9
+darkmode_js = [ "assets/js/darkmode.js" ]
+enableInlineShortcodes = true
+
+[markup.goldmark.extensions]
+definitionList = true
+footnote = true
+linkify = true
+linkifyProtocol = "https"
+strikethrough = true
+table = true
+taskList = true
+
+  [markup.goldmark.extensions.typographer]
+  apostrophe = "&rsquo;"
+  disable = false
+  ellipsis = "&hellip;"
+  emDash = "&mdash;"
+  enDash = "&ndash;"
+  leftAngleQuote = "&laquo;"
+  leftDoubleQuote = "&ldquo;"
+  leftSingleQuote = "&lsquo;"
+  rightAngleQuote = "&raquo;"
+  rightDoubleQuote = "&rdquo;"
+  rightSingleQuote = "&rsquo;"
+
+[markup.goldmark.parser]
+autoHeadingID = true
+autoHeadingIDType = "github"
+wrapStandAloneImageWithinParagraph = true
+
+  [markup.goldmark.parser.attribute]
+  block = false
+  title = true
+
+[markup.goldmark.renderer]
+hardWraps = false
+unsafe = true
+xhtml = false
+
+[params]
+author = "kkramineni"
+authorimage = "../assets/images/global/author.webp"
+og_image = "/images/tailbliss-cover.png"
+moto = "Filling the Gaps"
+description = "a personal Weblog, of my experience and learnings"
+disable_theme_toggle = false
+disable_stay_uptodate = false
+
+
+[params.social_media.github]
+enabled = true
+url = "https://github.com/kkramineni"
+
+
+[[menu.main]]
+identifier = "Home"
+name = "Home"
+url = "/"
+weight = 10
+
+[[menu.main]]
+identifier = "about"
+name = "About"
+url = "/about/"
+weight = 20
+
+[[menu.main]]
+identifier = "categories"
+pre = "dropdown"
+name = "Categories"
+weight = 30
+
+[[menu.categories]]
+identifier = "vmware"
+name = "VMware"
+url = "/vmware/"
+weight = 10
+
+[[menu.categories]]
+identifier = "Microsoft"
+name = "Microsoft"
+url = "/microsoft/"
+weight = 20
+
+[[menu.Microsoft]]
+identifier = "azure"
+name = "Azure"
+url = "/microsoft/"
+weight = 30
+
+
+
+
+
+[taxonomies]
+category = "Categories"
+tag = "Tags"
+
+
+[privacy.googleAnalytics]
+anonymizeIP = true
+disable = false
+respectDoNotTrack = false
+useSessionStorage = false
+
+
+[privacy.youtube]
+disable = false
+privacyEnhanced = true
+
