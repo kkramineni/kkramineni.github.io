@@ -1,28 +1,20 @@
 {{ define "main" }}
 <main>
+    <div class="col-span-6 px-4 text-center sm:mb-6 lg:text-left lg:mb-0">
+        <div class="relative px-2 mx-auto max-w-7xl">
+            <p class="max-w-xl mx-auto mb-6 font-normal text-gray-900 ">
+                Recent Posts
+            </p>
+        </div>
 
-
-    <!-- More main page content here... -->
-
-
-
-
+    </div>
     <!-- Blog section -->
     <div class="relative px-1 pt-8 pb-4 bg-transparent lg:px-8 lg:pt-12 lg:mb-4 md:mt-12">
         <div class="absolute inset-0">
             <div class="bg-gray-200 dark:bg-gray-900/50 "></div>
         </div>
         <div class="relative px-2 mx-auto max-w-7xl">
-            <div class="text-center">
-                <h2 class="text-3xl font-black tracking-tight text-primary-500 dark:text-primary-300 sm:text-4xl">
-                    {{ .Site.Params.P4.Heading }}
-                </h2>
-                {{ range .Site.Params.P4.Content }}
-                <p class="max-w-2xl mx-auto mt-3 text-xl text-gray-500 dark:text-gray-300 sm:mt-4">
-                    {{ .text }}
-                </p>
-                {{ end }}
-            </div>
+
 
             <div class="mx-auto text-gray-900 max-w-7xl dark:text-gray-50 md:px-1.5">
                 <div class="px-4 text-gray-900 dark:text-white not-prose dark:text-zinc-200">
