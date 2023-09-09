@@ -51,7 +51,7 @@ xhtml = false
 author = "kkramineni"
 authorimage = "../assets/images/global/author.webp"
 moto = "Filling the Gaps"
-description = "a personal Weblog, of my experience and learnings"
+description = "A personal Weblog, of my experience and learnings"
 disable_theme_toggle = false
 disable_stay_uptodate = false
 
@@ -82,20 +82,16 @@ weight = 30
 [[menu.categories]]
 identifier = "vmware"
 name = "VMware"
-url = "/vmware/"
+url = "/tags/vmware/"
 weight = 10
 
 [[menu.categories]]
 identifier = "Microsoft"
 name = "Microsoft"
-url = "/microsoft/"
+url = "/tags/microsoft/"
 weight = 20
 
-[[menu.Microsoft]]
-identifier = "azure"
-name = "Azure"
-url = "/microsoft/"
-weight = 30
+
 
 
 
