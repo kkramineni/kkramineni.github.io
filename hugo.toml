@@ -50,7 +50,6 @@ xhtml = false
 [params]
 author = "kkramineni"
 authorimage = "../assets/images/global/author.webp"
-og_image = "/images/tailbliss-cover.png"
 moto = "Filling the Gaps"
 description = "a personal Weblog, of my experience and learnings"
 disable_theme_toggle = false
