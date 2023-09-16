@@ -7,7 +7,7 @@ enableEmoji = true
 enableGitInfo = true
 enableRobotsTXT = true
 canonifyURLs = true
-paginate = 9
+paginate = 4
 darkmode_js = [ "assets/js/darkmode.js" ]
 enableInlineShortcodes = true
 
@@ -49,7 +49,7 @@ xhtml = false
 
 [params]
 author = "kkramineni"
-authorimage = "../assets/images/global/author.webp"
+authorimage = "../assets/images/global/"
 moto = "Filling the Gaps"
 description = "A personal Weblog, of my experience and learnings"
 disable_theme_toggle = false
@@ -88,14 +88,8 @@ weight = 10
 [[menu.categories]]
 identifier = "Microsoft"
 name = "Microsoft"
-url = "/tags/microsoft/"
+url = "/tags/Microsoft/"
 weight = 20
-
-
-
-
-
-
 
 [taxonomies]
 category = "Categories"
@@ -112,4 +106,3 @@ useSessionStorage = false
 [privacy.youtube]
 disable = false
 privacyEnhanced = true
-
