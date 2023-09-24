@@ -6,7 +6,8 @@ aliases = ["about-us"]
 author = "kishore"
 +++
 ---
-### Why I write stuff here?
+### Hey! I am Kishore Kumar Ramineni
+#### Why I write stuff here?
 > Basically I enjoy teaching and writing. Furthermore I like the idea of potentially others not having to do the same mistakes or lessons that i learnt. It also serves as a notebook for my own usage for future reference.
 
 

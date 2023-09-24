@@ -2,10 +2,12 @@
 author = "Kishore"
 title = "pfSense Firewall install and basic config"
 date = "2023-09-24"
-description = "Lorem Ipsum Dolor Si Amet"
+description = ""
 tags = [
     "VMware",
     "Home Lab",
+    "pfSense",
+    "Firewall"
 ]
 +++
 
