@@ -1,0 +1,14 @@
+{{- $s := .Site.Params }}
+{{- $c := default .Site.Title .Site.Copyright  }}
+{{- if or .Params.enableMathNotation $s.enableMathNotation }}
+  {{ partialCached "math" . }}
+{{- end }}
+{{- $iconsDir := default "icons/" .Site.Params.iconsDir }}
+{{- $defaultFooterLogo := printf "%s%s" $iconsDir "favicon.png"}}
+<footer class="footer">
+  <div class="footer_inner wrap pale">
+    <img src='{{ absURL (default $defaultFooterLogo $s.footerLogo) }}' class="icon icon_2 transparent" alt="{{ $c }}">
+    <p>cloubricks. All content rights reserved</p>
+    {{- partialCached "top" .}}
+  </div>
+</footer>

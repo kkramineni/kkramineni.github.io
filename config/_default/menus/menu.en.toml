@@ -1,0 +1,40 @@
+[[main]]
+  name = "Home"
+  url = ""
+  weight = -110
+
+# [[main]]
+#   name = "Archives"
+#   url = ""
+#   weight = -109
+[[main]]
+  name = "About"
+  url = "about/"
+  weight = -108
+
+# social menu links
+
+[[social]]
+  name = "github"
+  type = "social"
+  weight = 1
+  url = "https://github.com/kkramineni"
+[[social]]
+  name = "youtube"
+  weight = 2
+  url = "https://www.youtube.com/@cloud_bricks"
+
+
+# other supported social links
+# name = "youtube"
+# url = "https://www.youtube.com/#"
+# name = "facebook"
+# url = "https://facebook.com/#"
+# name = "instagram"
+# url = "https://instagram.com/#"
+# name = "stackoverflow"
+# url = "https://stackoverflow.com/#"
+# name = "gitlab"
+# url = "https://gitlab.com/#"
+# name = "discord"
+# url = "https://discord.gg/#"
