@@ -7,7 +7,7 @@
 {{- $defaultFooterLogo := printf "%s%s" $iconsDir "favicon_footer.png"}}
 <footer class="footer">
   <div class="footer_inner wrap pale">
-    <img src='{{ absURL (default $defaultFooterLogo $s.footerLogo) }}' class="icon icon_2 transparent" alt="{{ $c }}">
+    <img src='{{ absURL (default $defaultFooterLogo $s.footerLogo) }}' width="" height="" class="icon icon_2 transparent" alt="{{ $c }}">
     <p>cloubricks. All content rights reserved</p>
     {{- partialCached "top" .}}
   </div>
