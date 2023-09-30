@@ -11,7 +11,7 @@ author = "kishore"
 > Basically I enjoy teaching and writing. Furthermore I like the idea of potentially others not having to do the same mistakes or lessons that i learnt. It also serves as a notebook for my own usage for future reference.
 
 
-{{% notice info "My portable Lab" %}}
+{{% notice info "My Portable Lab" %}}
 **Lenovo X1 Extreme Gen 2**
 - Intel Core i7-9750H @2.60 GHz
 - 64GB DDR4 SDRAM
