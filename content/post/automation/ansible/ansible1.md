@@ -10,6 +10,8 @@ tags = [
     "Ansible",
     "Home Lab",
 ]
+categories = "Automation"
+usePageBundles = true
 +++
 
 AWX stands for “Ansible Web eXecutable” is a free and open-source project that allows you to easily manage and control Ansible projects. AWX is the upstream project of Red Hat Ansible Automation Platform. AWX provides a web-based user interface, a powerful REST API and allows to manage or sync inventory with other cloud sources

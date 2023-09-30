@@ -8,7 +8,7 @@ tags = [
     "Home Lab",
 ]
 thumbnail = "images/Lab_BG.png"
-
+categories = "VMware"
 +++
 
 ## Introduction

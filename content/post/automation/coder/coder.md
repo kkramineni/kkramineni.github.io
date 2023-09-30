@@ -7,8 +7,8 @@ tags = [
     "IaC",
     "Automation",
     "Code",
-
 ]
+categories = "Automation"
 thumbnail = "images/code-server/code-server.png"
 +++
 

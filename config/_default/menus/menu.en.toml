@@ -12,6 +12,18 @@
   url = "about/"
   weight = -108
 
+[[main]]
+  name = "VMware"
+  url = "/categories/vmware/"
+  weight = -107
+
+
+[[main]]
+  name = "VMware"
+  url = "categories/automation/"
+  weight = -106
+
+
 # social menu links
 
 [[social]]

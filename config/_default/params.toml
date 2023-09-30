@@ -15,7 +15,7 @@ introDescription = "a personal Weblog"
 ga_analytics = "G-XZBH4JYYBW"
 
 # Google tag manager
-google_tag_manager_id = "G-XZBH4JYYBW"
+#google_tag_manager_id = "G-XZBH4JYYBW"
 
 # Baidu analytics Id
 # baidu_analytics = "XXXXXXXX"

@@ -17,10 +17,10 @@ other = "Featured Posts"
 other = "Recent Posts"
 
 [404_title]
-other = "Lost"
+other = "Oops!"
 
 [could_not_find]
-other = "We couldn't find the page you're looking for"
+other = "Couldn't find the page you're looking for"
 
 [go_back]
 other = "Go Back"
