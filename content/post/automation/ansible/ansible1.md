@@ -11,12 +11,12 @@ tags = [
     "Home Lab",
 ]
 categories = "Automation"
-usePageBundles = true
+thumbnail = "images/awx/awx_logo.png"
 +++
 
 AWX stands for “Ansible Web eXecutable” is a free and open-source project that allows you to easily manage and control Ansible projects. AWX is the upstream project of Red Hat Ansible Automation Platform. AWX provides a web-based user interface, a powerful REST API and allows to manage or sync inventory with other cloud sources
 ### Install AWX Operator Installtion on K3S
-![img placeholder](/images/awx/001.png " ")
+![img placeholder](/images/awx/awx_logo.png " ")
 
 The open source projects Ansible and AWX, is a task engine and Web interface for scheduling and running playbook tasks on the inventories the playbooks interact with.
 
