@@ -20,7 +20,7 @@
 
 [[main]]
   name = "VMware"
-  url = "categories/automation/"
+  url = "categories/vmware/"
   weight = -106
 
 

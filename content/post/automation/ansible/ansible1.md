@@ -24,8 +24,26 @@ In this tutorial, we will install and configure Ansible AWX operator on Rocky Li
 
 {{% notice tip "Steps involved" %}}
 1. Install Rocky Linux 8.x or CentOS 8.x server with a minimum of 4 GB RAM.
-2. Install K3S
+2. <a href="https://cloudbricks.dev/post/containers/k3s/k3s-01/">Install K3S</a>
 3. Install AWX operator on K3s
 {{% /notice %}}
 
+### Install AWX Operator:
 
+1. Install pre-requisites with the following command
+```shell
+sudo yum -y install git make
+```
+2. Download/Clone the AWX Repo
+
+```python
+git clone https://github.com/ansible/awx-operator.git
+```
+
+
+``` powershell
+cd awx-operator/
+sudo yum -y install jq
+RELEASE_TAG=`curl -s https://api.github.com/repos/ansible/awx-operator/releases/latest | grep tag_name | cut -d '"' -f 4`
+echo $RELEASE_TAG
+```
