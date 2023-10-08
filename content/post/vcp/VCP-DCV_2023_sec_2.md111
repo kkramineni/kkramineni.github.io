@@ -1,0 +1,79 @@
++++
+author = "Kishore"
+title = "VCP-DCV 2023 - Section 2"
+date = "2023-09-20"
+description = ""
+tags = [
+     "VCP-DCV 2023",
+]
+thumbnail = "images/vsphere/vcp_dcv_2023/vmw-professional-data-center-virtualization.png"
+categories = "VMware"
+series = "VCP-DCV 2023"
++++
+
+#### Exam Sections
+VMware exam blueprint sections are now standardized to the seven sections below, some of which may NOT be included
+in the final exam blueprint depending on the exam objectives.
+- Section 1 – Architecture and Technologies
+- Section 2 – Products and Solutions
+- Section 3 – Planning and Designing
+- Section 4 – Installing, Configuring, and Setup
+- Section 5 – Performance-tuning, Optimization, and Upgrades
+- Section 6 – Troubleshooting and Repairing
+- Section 7 – Administrative and Operational Tasks
+
+***Section 2 –– VMware Products and Solutions***
+
+Objective | Description
+--------|-------|
+2.1 | Describe the role of VMware vSphere in the Software-Defined Data Center
+2.2 | Identify use cases for VMware vSphere+
+2.3 | Identify use cases for VMware vCenter Converter
+2.4|  Identify disaster recovery (DR) use cases
+2.4.1 | Identify VMware vCenter replication options
+2.4.2 | Identify use cases for VMware Site Recovery Manager (SRM)
+
+***Section 3 –– Planning and Designing - There are no testable objectives for this section***
+
+***Section 4 –– Installing, Configuring, and Setup***
+Objective | Description
+--------|-------|
+4.1 | Describe single sign-on (SSO)
+4.1.1 | Configure a single sign-on (SSO) domain
+4.1.2 | Join an existing single sign-on (SSO) domain
+4.2 | Configure vSphere distributed switches
+4.2.1 | Create a distributed switch
+4.2.2 | Add ESXi hosts to the distributed switch
+4.2.3 | Examine the distributed switch configuration
+4.3 | Configure Virtual Standard Switch (VSS) advanced virtual networking options
+4.4 | Set up identity sources
+1.4.3 | Describe how DRS scores virtual machines
+1.4.4 | Describe VMware vSphere High Availability (HA)
+1.4.5 | Identify use cases for fault tolerance
+1.5 | Explain the difference between VMware standard switches and distributed switches
+1.5.1 | Describe VMkernel networking
+1.5.2 | Manage networking on multiple hosts with vSphere Distributed Switch (VDS)
+1.5.3 | Describe networking policies
+1.5.4 | Manage Network I/O Control (NIOC) on a vSphere Distributed Switch (VDS)
+1.5.5 | Describe Network I/O Control (NIOC)
+1.6 | Describe VMware vSphere Lifecycle Manager concepts
+1.7 | Describe the basics of VMware vSAN as primary storage
+1.7.1 | Identify basic vSAN requirements (networking, disk count, and type)
+1.7.2 | Identify Express Storage Architecture (ESA) concepts for vSAN 8
+1.8 | Describe the role of Virtual Machine Encryption in a data center
+1.8.1 | Describe vSphere Trust Authority
+1.8.2 | Describe the role of a Key Management Services (KMS) server in vSphere
+1.9 | Recognize methods of securing virtual machines
+1.9.1 | Recognize use cases for a virtual Trusted Platform Module (vTPM)
+1.9.2 | Differentiate between Basic Input or Output System (BIOS) and Unified Extensible Firmware Interface (UEFI) firmware
+1.9.3 | Recognize use cases for Microsoft virtualization-based security (VBS)
+1.10 | Describe identity federation
+1.10.1 | Describe the architecture of identity federation
+1.10.2 | Recognize use cases for identity federation
+1.11 | Describe VMware vSphere Distributed Services Engine
+1.11.1 | Describe the role of a data processing unit (DPU) in vSphere
+1.12 | Identify use cases for VMware Tools
+1.13 | Describe the high-level components of VMware vSphere with Tanzu
+1.13.1 | Identify the use case for a Supervisor Cluster and Supervisor Namespace
+1.13.2 | Identify the use case for vSphere Zones
+1.13.3 | Identify the use case for a VMware Tanzu Kubernetes Grid (TKG) cluster

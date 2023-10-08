@@ -23,6 +23,10 @@
   url = "categories/vmware/"
   weight = -106
 
+[[main]]
+  name = "Home Lab"
+  url = "homelab/"
+  weight = -105
 
 # social menu links
 
