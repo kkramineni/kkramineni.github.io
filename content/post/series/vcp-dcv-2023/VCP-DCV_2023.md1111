@@ -6,7 +6,7 @@ description = ""
 tags = [
     "VCP-DCV 2023",
 ]
-thumbnail = "images/Lab_BG.png"
+thumbnail = "/images/vsphere/vcp_dcv_2023/vmw-professional-data-center-virtualization.png"
 categories = "VMware"
 series = "VCP-DCV 2023"
 +++

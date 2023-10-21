@@ -10,6 +10,7 @@ tags = [
     "Home Lab",
 ]
 categories = "VMware"
+thumbnail = "/images/esxi-host.svg"
 
 +++
 

@@ -7,7 +7,7 @@ tags = [
     "VMware",
     "Home Lab",
 ]
-thumbnail = "images/Lab_BG.png"
+#thumbnail = "images/Lab_BG.png"
 categories = "VMware"
 +++
 

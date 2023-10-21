@@ -9,6 +9,7 @@ tags = [
     "pfSense",
     "Firewall"
 ]
+thumbnail = "/images/pfsense.png"
 +++
 
 ### Hardware Requirements:

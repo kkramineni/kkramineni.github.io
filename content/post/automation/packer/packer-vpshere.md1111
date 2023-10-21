@@ -1,0 +1,32 @@
++++
+author = "Kishore"
+title = "How to Create Images/Templates/VMs in vSphere - using Packer"
+date = "2023-10-20"
+description = ""
+tags = [
+    "IaC",
+    "Automation",
+    "Linux",
+    "packer",
+    "Home Lab",
+]
+categories = "Automation"
+thumbnail = "/images/packer_vsphere.png"
+series = "packer"
++++
+
+![img placeholder](/images/packer_vsphere.png " ")
+
+
+This Series provides a collection of examples that demonstrate how to use Packer and the Packer Plugin for VMware vSphere to automate the creation of virtual machine images for VMware vSphere environments.
+
+HashiCorp Configuration Language ("HCL") is used for the examples
+
+---
+
+#### VMware ESXi
+
+| Operating System             | Version   |
+| :---                         | :---      |
+| VMware ESXi                  | 8 update 1|
+| VMware ESXi                  |          |

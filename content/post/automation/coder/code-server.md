@@ -9,7 +9,7 @@ tags = [
     "Code",
 ]
 categories = "Automation"
-thumbnail = "images/code-server/code-server.png"
+thumbnail = "/images/code-server/code-server.png"
 +++
 
 Run VS Code on any machine anywhere and access it in the browser.

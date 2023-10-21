@@ -9,6 +9,7 @@ tags = [
     "Rocky Linux",
     "Home Lab",
 ]
+thumbnail = "/images/Rocky_Linux.png"
 +++
 
 ## Rocky Linux Server Template creation for Home Lab

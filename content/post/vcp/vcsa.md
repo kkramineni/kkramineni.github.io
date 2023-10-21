@@ -10,7 +10,7 @@ tags = [
     "Home Lab",
 ]
 categories = "VMware"
-
+thumbnail = "/images/vSphere.png"
 +++
 
 This post is part of VMware vShere How to hands-on training that focuses on installing, configuring, and managing VMware vSphere 8, which includes VMware VCSA8 and VMware vCenter8. This course prepares you to administer a vSphere infrastructure for an organization of any size.
