@@ -113,6 +113,12 @@ Finally, apply the changes to create the AWX instance in the cluster
 ``` shell
 kubectl apply -k .
 ```
+We don't have to keep repeating -n awx, let's set the current namespace for kubectl:
+
+```shell
+kubectl config set-context --current --namespace=awx
+```
+
 After few minutes, the new AWX instance will be deployed. we can check the logs using the following command, in order to know where the installation process is at
 ```
 kubectl logs -f deployments/awx-operator-controller-manager -c awx-manager
