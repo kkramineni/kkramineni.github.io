@@ -1,0 +1,84 @@
++++
+author = "Kishore"
+title = "How to Create CentOS 7 Template in vSphere - using Packer"
+date = "2023-10-24"
+description = ""
+tags = [
+    "IaC",
+    "Automation",
+    "Linux",
+    "packer",
+    "Home Lab",
+]
+categories = "Automation"
+thumbnail = "/images/packer_vsphere.png"
+series = "packer"
++++
+
+#### Overview
+
+Packer uses the HashiCorp Configuration Language - HCL - designed to allow concise descriptions of the required steps to get to a build file. This page describes the features of HCL2 exhaustively
+
+<a href="https://developer.hashicorp.com/packer/docs/templates/hcl_templates"> HCL Templates reference</a>
+
+I have created 3 files in the folder structure that is created.
+
+1. centos7.pkr.hcl
+
+This file contains the blocks as mentioned in the refernece, from declared variables, build and source blocks. Packer uses this to automate the VM template creation.
+
+2. centos7.auto.pkvars.hcl
+Contains all input variables to which you assign values. Any explicit values in this file will override the declared default values (these are found in the following file). The auto extension enables Packer to use this file automatically. It does not require you to reference or pass it in the command line explicitly
+3. ks.cfg under scripts folder
+
+All Packer can do without a kickstart file is provision the virtual machine and destroy it in vCenter (the build will time out as it has no connectivity to the VM itself). The kickstart automates the installation of the operating system, in this case, CentOS.
+
+---
+
+
+
+{{% notice tip "Built time" %}}
+It took around 10 mins for me to complete the template creation.
+{{% /notice %}}
+
+---
+Login to the code server as root, run the floowing commands
+
+```shell
+yum install -y yum-utils
+```
+
+![img placeholder](/images/packer/packer-001.png " ")
+
+
+add the hashicorp repo
+
+```shell
+yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+```
+![img placeholder](/images/packer/packer-002.png " ")
+
+Install packer
+
+```shell
+sudo yum -y install packer
+```
+
+![img placeholder](/images/packer/packer-003.png " ")
+
+validate the packer installation by running
+
+``` shell
+packer version
+```
+![img placeholder](/images/packer/packer-004.png " ")
+
+
+
+
+
+### Watch the video on How to Setup packer
+
+{{< youtube zlLKCb4DdEw >}}
+
+<br>
