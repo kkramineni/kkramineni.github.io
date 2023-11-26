@@ -1,0 +1,80 @@
++++
+author = "Kishore"
+title = "How to setup Canonical MicroCloud"
+date = "2023-11-15"
+description = ""
+tags = [
+    "Cloud",
+    "Openstack",
+    "canonical",
+    "Edge Cloud",
+    "Home Lab",
+]
+categories = "Cloud"
+thumbnail = "/images/microcloud.png"
+series = "Private Cloud"
++++
+
+![img placeholder](/images/microcloud.png " ")
+##### MicroCloud
+MicroCloud allows you to deploy your own fully functional cloud in minutes.
+
+It’s a snap package that can automatically configure LXD, Ceph, and OVN across a set of servers. It relies on mDNS to automatically detect other servers on the network, making it possible to set up a complete cluster by running a single command on one of the machines.
+
+MicroCloud creates a small footprint cluster of compute nodes with distributed storage and secure networking, optimized for repeatable, reliable remote deployments. MicroCloud is aimed at edge computing, and anyone in need of a small-scale private cloud.
+
+---
+
+###### Requirements:
+
+MicroCloud requires a minimum of three machines.
+
+*Networking requirements:*
+
+For networking, MicroCloud requires a dedicated network interface and an uplink network that is an actual L2 subnet. See Networking for more information.
+
+The IP addresses of the machines must not change after installation, so DHCP is not supported.
+
+*Software requirements:*
+
+MicroCloud requires snapd version 2.59 or newer.
+
+
+Hostname| IP Address | Specifications
+--------|-------|-------|
+micro-01.cloudbricks.local| 192.168.20.50| 4CPU,8 GB RAM, 200GB for OS, 300GB Addiotnal disk
+micro-02.cloudbricks.local| 192.168.20.51| 4CPU,8 GB RAM, 200GB for OS, 300GB Addiotnal disk
+micro-03.cloudbricks.local| 192.168.20.52| 4CPU,8 GB RAM, 200GB for OS, 300GB Addiotnal disk
+
+---
+### Getting started with OpenTofu
+
+##### Installing OpenTofu
+
+The most direct method to install OpenTofu is to download it from GitHub releases.where you can find the zip archive for the platforms.
+
+
+<a href="https://github.com/opentofu/opentofu/releases/"> OpenTofu Download </a>
+
+In order to install(RPM based distros), Login to the code server as root, run the floowing commands
+
+```shell
+yum install https://github.com/opentofu/opentofu/releases/download/v1.6.0-alpha3/tofu_1.6.0-alpha3_amd64.rpm
+```
+
+![img placeholder](/images/tofu/install_1.png " ")
+
+![img placeholder](/images/tofu/install_2.png " ")
+
+Validate the tofu installation by running
+
+``` shell
+tofu version
+```
+![img placeholder](/images/tofu/tofu_version.png " ")
+
+``` shell
+tofu
+```
+
+![img placeholder](/images/tofu/install_3.png  " ")

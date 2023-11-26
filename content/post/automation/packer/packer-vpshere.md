@@ -1,7 +1,7 @@
 +++
 author = "Kishore"
 title = "How to Create Images/Templates/VMs in vSphere - using Packer"
-date = "2023-10-20"
+date = "2023-11-24"
 description = ""
 tags = [
     "IaC",

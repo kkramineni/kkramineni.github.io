@@ -39,18 +39,3 @@
   name = "youtube"
   weight = 2
   url = "https://www.youtube.com/@cloud_bricks"
-
-
-# other supported social links
-# name = "youtube"
-# url = "https://www.youtube.com/#"
-# name = "facebook"
-# url = "https://facebook.com/#"
-# name = "instagram"
-# url = "https://instagram.com/#"
-# name = "stackoverflow"
-# url = "https://stackoverflow.com/#"
-# name = "gitlab"
-# url = "https://gitlab.com/#"
-# name = "discord"
-# url = "https://discord.gg/#"
