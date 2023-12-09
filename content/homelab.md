@@ -23,9 +23,10 @@ Recently I purchased a refurbished HPE DL 360 G9 from  ebay.
 {{% notice info "Rack Server" %}}
 **HPE DL 360 G9**
 - Intel Xeon E2683 v4 (16 Cores)- 2 processors
-- 256GB DDR4 SDRAM
+- 256GB DDR4 RAM
 - 2* 480GB SSD
-- 1* 512 GB PCIe NVMe SSD - *Experimental*
+- 1* 2TB PCIe NVMe SSD
+- 1* 512GB PCIe NVMe SSD
 {{% /notice %}}
 
 ![img placeholder](/images/Home_lab_HPE_Screen.png " ")
