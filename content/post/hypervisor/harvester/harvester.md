@@ -134,6 +134,14 @@ Complete the following steps to add additional nodes to the exisint cluster:
 3. check the console
 ![img placeholder](/images/harvester/harvester-33.png " ")
 
+### Watch the video on How to Install Harvester HCI in VMware vSphere for Hands on
 
+{{< youtube HJn6QbXR7u8 >}}
+
+### Watch the video on How to Install Harvester HCI in VMware vSphere for Hands on
+
+{{< youtube 5yXREqhHbhg >}}
+
+<br>
 
 
