@@ -301,7 +301,7 @@ resource "null_resource" "micro-02" {
     connection {
       user = "kishore" // relace with your username
       password = "VMware1!" //replace with your password
-      host = "micro-01.cloudbricks.local" //replace with your hostname
+      host = "micro-02.cloudbricks.local" //replace with your hostname
     }
     provisioner "remote-exec" {
       inline = [
@@ -319,7 +319,7 @@ resource "null_resource" "micro-03" {
     connection {
       user = "kishore" // relace with your username
       password = "VMware1!" //replace with your password
-      host = "micro-02.cloudbricks.local" //replace with your hostname
+      host = "micro-03.cloudbricks.local" //replace with your hostname
     }
     provisioner "remote-exec" {
       inline = [
