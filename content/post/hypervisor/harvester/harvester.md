@@ -45,7 +45,7 @@ Network|1Gbps minimum
 
 {{% notice info "Node-01" %}}
 - Guest OS Type: SUSE OpenSUSE
-- 8vCPU, harwarea virtualzation is enabled
+- 8vCPU, hardware virtualzation is enabled
 - 32GB RAM
 - 250GB Disk
 - VMXNet3 Adapter
@@ -53,7 +53,7 @@ Network|1Gbps minimum
 
 {{% notice info "Node-02" %}}
 - Guest OS Type: SUSE OpenSUSE
-- 8vCPU, harwarea virtualzation is enabled
+- 8vCPU, hardware virtualzation is enabled
 - 32GB RAM
 - 250GB Disk
 - VMXNet3 Adapter
