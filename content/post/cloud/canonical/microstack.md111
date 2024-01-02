@@ -1,7 +1,7 @@
 +++
 author = "Kishore"
 title = "How to setup microstck openstack"
-date = "2023-12-24"
+date = "2023-12-28"
 description = ""
 tags = [
     "Cloud",
@@ -17,7 +17,7 @@ series = "Private Cloud"
 
 ![img placeholder](/images/microstack.png " ")
 ##### Microstack
-MicroCloud allows you to deploy your own fully functional cloud in minutes.
+stack allows you to deploy your own fully functional cloud in minutes.
 
 It’s a snap package that can automatically configure LXD, Ceph, and OVN across a set of servers. It relies on mDNS to automatically detect other servers on the network, making it possible to set up a complete cluster by running a single command on one of the machines.
 
