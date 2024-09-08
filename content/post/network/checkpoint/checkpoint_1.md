@@ -1,7 +1,7 @@
 +++
 author = "Kishore"
 title = "Checkpoint CCSA"
-date = "2023-12-13"
+date = "2024-05-27"
 description = ""
 tags = [
     "Checkpoint Certified Security Administrator (CCSA)",

@@ -17,7 +17,7 @@ series = "Storage"
 
 ![img placeholder](/images/storage/unity-logo.png " ")
 
-**Dell Unity VSA**  is a virutal appliance hich runs on VMware ESXi environement. This VSA will be used for automation testing and as a Storage (iscsi) for my Netsted ESXi deployments
+**Dell Unity VSA**  is a virutal appliance which runs on VMware ESXi environement. This VSA will be used for automation testing and as a Storage (iscsi) for my Netsted ESXi deployments
 
 System Requirements:
 
