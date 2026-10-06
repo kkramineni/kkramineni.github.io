@@ -1,15 +1,1 @@
-# ads.txt authorizes AdSense to sell this domain's inventory directly.
-#
-# Nothing is authorised right now. The previous entry authorised pub-9855783481482557,
-# an AdSense for YouTube ID whose account is deactivated; a YouTube ID cannot
-# serve website ads. The AdSense dashboard therefore reported "Not found",
-# because this file also used to sit at the repository root where Hugo never
-# publishes it - it belongs in static/ to reach the site root.
-#
-# When the AdSense for content websites account is approved, replace the two
-# comment lines below with a single record using the NEW pub- number:
-#
-# google.com, pub-NEW_PUBLISHER_NUMBER, DIRECT, f08c47fec0942fa0
-#
-# Format is strict: one record per line, no header, no comment lines mixed in
-# with active records.
+google.com, pub-9855783481482557, DIRECT, f08c47fec0942fa0
