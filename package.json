@@ -1,11 +1,13 @@
 {
-  "name": "aiops-site",
+  "name": "cloudbricks-dev",
   "version": "1.0.0",
   "private": true,
-  "description": "Hugo site assets pipeline (Tailwind CSS v4)",
+  "description": "cloudbricks.dev - Hugo site with a custom shadcn/ui theme (Tailwind CSS v4)",
   "scripts": {
+    "dev": "hugo server --buildDrafts",
     "build": "hugo --gc --minify",
-    "dev": "hugo server --buildDrafts"
+    "search": "hugo --gc --minify --destination .search-index && pagefind --site .search-index && node tools/copy-search-index.mjs",
+    "og": "python tools/og-image.py"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",

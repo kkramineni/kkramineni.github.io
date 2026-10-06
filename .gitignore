@@ -6,6 +6,9 @@
 # Hugo build stats (regenerated on every build)
 /hugo_stats.json
 
+# Scratch build for the local Pagefind index (npm run search)
+/.search-index/
+
 # Dependencies
 /node_modules/
 # package-lock.json must be COMMITTED: CI runs `npm ci`, which is a no-op
