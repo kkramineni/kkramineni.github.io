@@ -1,0 +1,65 @@
+{{ define "main" }}
+  {{- /* Search results.
+
+       Pagefind indexes the built HTML after `hugo` finishes, so this page only
+       has to mount the UI bundle that the Pagefind CLI emits into
+       /pagefind/. In `hugo server` that directory does not exist yet - the
+       bundle 404s and results stay empty, which is expected until you run
+       `pagefind --site public`.
+
+       Kept at /search/ because that is the URL the previous hugo-clarity theme
+       published, so existing links keep working. */ -}}
+  <div class="container mx-auto max-w-3xl px-4 py-12 md:py-16">
+    <header class="flex flex-col gap-3">
+      <h1 class="text-3xl font-bold tracking-tight text-balance md:text-4xl">Search</h1>
+      <p class="text-lg text-pretty text-muted-foreground">
+        Search every post by title, tag, or content.
+      </p>
+    </header>
+
+    <div class="mt-8">
+      {{/* This placeholder is replaced the moment pagefind-ui.js initialises.
+           If the bundle is missing - which is the normal state under
+           `hugo server`, and would also happen in CI if the pagefind step ever
+           failed - the placeholder stays and explains itself, instead of the
+           page rendering as a bare heading. */}}
+      <div id="pagefind">
+        <p class="text-muted-foreground">
+          Loading the search index&hellip;
+        </p>
+        <p class="mt-3 text-sm text-muted-foreground">
+          Search is indexed after the site is built. Under <code>hugo server</code>
+          the index does not exist yet &mdash; run
+          <code>pagefind --site public</code> to generate it. You can still browse by
+          <a href="{{ "/tags" | relLangURL }}" class="font-medium underline underline-offset-4">tag</a>
+          in the meantime.
+        </p>
+      </div>
+      <noscript>
+        <p class="text-muted-foreground">
+          Search needs JavaScript. You can still browse by
+          <a href="{{ "/tags" | relLangURL }}" class="font-medium underline underline-offset-4">tag</a>.
+        </p>
+      </noscript>
+    </div>
+  </div>
+
+  <script src="{{ "/pagefind/pagefind-ui.js" | relLangURL }}"></script>
+  {{- /* Pagefind's own stylesheet, tinted to the active design variant. The
+         variables it reads are the same ones the theme exposes. */ -}}
+  <link rel="stylesheet" href="{{ "/pagefind/pagefind-ui.css" | relLangURL }}" />
+  <style>
+    #pagefind {
+      --pagefind-ui-primary: var(--primary);
+      --pagefind-ui-text: var(--foreground);
+      --pagefind-ui-background: var(--background);
+      --pagefind-ui-border: var(--border);
+      --pagefind-ui-border-width: 1px;
+      --pagefind-ui-border-radius: var(--radius);
+      --pagefind-ui-font-family: var(--font-sans);
+    }
+    #pagefind .pagefind-ui__result-nested {
+      padding: 0;
+    }
+  </style>
+{{ end }}

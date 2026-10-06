@@ -1,68 +1,60 @@
 +++
-author = "Kishore"
-title = "How to setup OpenTofu"
+title = "How to Setup OpenTofu"
+description = "Installing OpenTofu from the GitHub release RPM and walking through the write, plan, and apply workflow."
 date = "2023-11-06"
-description = ""
-tags = [
-    "IaC",
-    "Automation",
-    "Linux",
-    "tofu",
-    "Home Lab",
-]
+author = "Kishore"
+tags = ["IaC", "Automation", "Linux", "tofu", "Home Lab"]
 categories = "Automation"
 thumbnail = "/images/openTofu.png"
 series = "OpenTofu"
 +++
 
-![img placeholder](/images/openTofu.png " ")
-##### What is OpenTofu?
-The open source infrastructure as code tool.
-Previously named OpenTF, OpenTofu is a fork of Terraform that is open-source, community-driven, and managed by the Linux Foundation.
+## What is OpenTofu?
 
----
+An open-source infrastructure-as-code tool. Previously called OpenTF, OpenTofu is a community-driven fork of Terraform now managed by the Linux Foundation.
 
-The core OpenTofu workflow consists of three stages:
+## The core workflow
 
-###### Write:
-Defining resources, which may be across multiple cloud providers and services. For example, you might create a configuration to deploy an application on virtual machines in a Virtual Private Cloud (VPC) network with security groups and a load balancer.
+Three stages, in order:
 
-###### Plan:
-OpenTofu creates an execution plan describing the infrastructure it will create, update, or destroy based on the existing infrastructure and your configuration.
+### Write
 
-###### Apply:
-On approval, OpenTofu performs the proposed operations in the correct order, respecting any resource dependencies.
+Define your resources. These can span multiple cloud providers and services — for example, deploying an application onto virtual machines in a VPC network, with security groups and a load balancer attached.
 
+### Plan
 
----
-### Getting started with OpenTofu
+OpenTofu produces an execution plan describing what it will create, update, or destroy, based on your configuration compared against the existing infrastructure.
 
-##### Installing OpenTofu
+### Apply
 
-The most direct method to install OpenTofu is to download it from GitHub releases.where you can find the zip archive for the platforms.
+Once you approve the plan, OpenTofu performs the proposed operations in dependency order.
 
+## Installing OpenTofu
 
-<a href="https://github.com/opentofu/opentofu/releases/"> OpenTofu Download </a>
+The most direct method is to download the archive for your platform from [OpenTofu GitHub releases](https://github.com/opentofu/opentofu/releases/).
 
-In order to install(RPM based distros), Login to the code server as root, run the floowing commands
+On RPM-based distributions, log in to the code server as `root` and run:
 
 ```shell
 yum install https://github.com/opentofu/opentofu/releases/download/v1.6.0-alpha3/tofu_1.6.0-alpha3_amd64.rpm
 ```
 
-![img placeholder](/images/tofu/install_1.png " ")
+![Installing the OpenTofu RPM](/images/tofu/install_1.png)
 
-![img placeholder](/images/tofu/install_2.png " ")
+![OpenTofu installed](/images/tofu/install_2.png)
 
-Validate the tofu installation by running
+Verify the installation:
 
-``` shell
+```shell
 tofu version
 ```
-![img placeholder](/images/tofu/tofu_version.png " ")
 
-``` shell
+![Checking the OpenTofu version](/images/tofu/tofu_version.png)
+
+Run `tofu` with no arguments for the help output:
+
+```shell
 tofu
 ```
 
-![img placeholder](/images/tofu/install_3.png  " ")
+![OpenTofu help output](/images/tofu/install_3.png)

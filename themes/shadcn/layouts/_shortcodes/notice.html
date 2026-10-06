@@ -1,0 +1,47 @@
+{{- /*
+  Notice — ported from the hugo-clarity theme so migrated posts render as-is.
+
+    {{% notice tip "Title" %}}…{{% /notice %}}
+
+  Uses the % delimiters, so the body is rendered as Markdown. Positional args
+  are (variant, title); the variant also picks the icon and colours.
+*/ -}}
+{{- $variant := .Get 0 | default "info" -}}
+{{- $title := .Get 1 -}}
+{{- $body := .Inner | strings.TrimSpace -}}
+
+{{- /* Normalise hugo-clarity's vocabulary onto the alert variants. */ -}}
+{{- $style := "info" -}}
+{{- $icon := "info" -}}
+{{- if or (eq $variant "tip") (eq $variant "note") (eq $variant "success") -}}
+  {{- $style = "success" -}}
+  {{- $icon = "check" -}}
+{{- else if or (eq $variant "warning") (eq $variant "caution") -}}
+  {{- $style = "warning" -}}
+  {{- $icon = "triangle-alert" -}}
+{{- else if or (eq $variant "danger") (eq $variant "error") -}}
+  {{- $style = "destructive" -}}
+  {{- $icon = "triangle-alert" -}}
+{{- end -}}
+
+<div class="alert alert-{{ $style }} my-6">
+  {{ partial "icon.html" (dict "name" $icon) }}
+  <div class="col-start-2 grid gap-1">
+    {{- with $title }}
+      <div class="font-medium tracking-tight">{{ . }}</div>
+    {{- end }}
+    {{- with $body }}
+      <div class="text-sm leading-relaxed [&>p]:mt-0 [&>p:last-child]:mb-0">
+        {{- /* If the body is already HTML, pass it through as-is; feeding raw
+               HTML back through Goldmark wraps it in a stray <div>. Only render
+               as Markdown when the body is plain text. */ -}}
+        {{- $looksHTML := strings.Contains . "<" -}}
+        {{- if $looksHTML -}}
+          {{ . | safeHTML }}
+        {{- else -}}
+          {{ . | $.Page.RenderString (dict "display" "block") }}
+        {{- end -}}
+      </div>
+    {{- end }}
+  </div>
+</div>

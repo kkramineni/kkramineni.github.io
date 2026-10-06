@@ -1,0 +1,41 @@
+{{- /* Sidebar box listing the other posts in the same series(es) as the
+     current page. Rendered inside layouts/page.html.
+
+     The series taxonomy in hugo.toml gives us .GetTerms "series": each entry
+     is the term page, and .Pages on it is the full series.
+*/ -}}
+{{- $seriesTerms := .GetTerms "series" -}}
+{{- with $seriesTerms }}
+  <aside class="not-prose rounded-xl border border-border bg-card p-5">
+    <h2 class="text-sm font-semibold tracking-tight text-muted-foreground uppercase">
+      Series
+    </h2>
+    {{- range . }}
+      {{- $term := . -}}
+      <div class="mt-4">
+        <a
+          href="{{ .RelPermalink }}"
+          class="text-sm font-medium text-primary transition-colors hover:underline"
+        >
+          {{ .Title }}
+        </a>
+        <ol class="mt-2 flex flex-col gap-1.5 text-sm">
+          {{- range .Pages }}
+            <li>
+              {{- if eq .RelPermalink $.Page.RelPermalink }}
+                <span class="font-medium text-foreground" aria-current="true">{{ .Title }}</span>
+              {{- else }}
+                <a
+                  href="{{ .RelPermalink }}"
+                  class="text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {{ .Title }}
+                </a>
+              {{- end }}
+            </li>
+          {{- end }}
+        </ol>
+      </div>
+    {{- end }}
+  </aside>
+{{- end }}

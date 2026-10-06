@@ -1,0 +1,254 @@
+{{- /* Marketing landing page. Not the default page any more — it lives at
+  /landing/ (content/landing/_index.md sets `layout: landing`).
+
+  All copy comes from data/landing.yaml. Every section is optional, so delete
+  a block there to drop that section.
+*/ -}}
+{{ define "main" }}
+  {{- $landing := hugo.Data.landing -}}
+
+  <!-- ================================================================ Hero -->
+  <section class="relative overflow-hidden border-b border-border">
+    <div
+      class="pointer-events-none absolute inset-0 -z-10 opacity-70"
+      style="background-image:radial-gradient(60% 50% at 50% 0%,color-mix(in oklch,var(--primary) 12%,transparent) 0%,transparent 70%)"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="container mx-auto flex flex-col items-center gap-6 px-4 py-20 text-center md:py-28">
+      {{- with $landing.hero.badge }}
+        <a
+          href="{{ .url | default "#features" }}"
+          class="badge badge-outline hover:bg-accent hover:text-accent-foreground"
+        >
+          <span class="size-1.5 rounded-full bg-chart-2"></span>
+          {{ .text }}
+          {{ partial "icon.html" (dict "name" "arrow-right") }}
+        </a>
+      {{- end }}
+
+      <h1
+        class="max-w-3xl text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl"
+      >
+        {{ $landing.hero.title | default site.Title }}
+      </h1>
+
+      <p class="max-w-2xl text-lg text-pretty text-muted-foreground md:text-xl">
+        {{ $landing.hero.subtitle | default site.Params.tagline }}
+      </p>
+
+      <div class="flex flex-col gap-3 sm:flex-row">
+        {{- range $landing.hero.actions }}
+          <a
+            href="{{ .url | relLangURL }}"
+            class="btn {{ .style | default "btn-default" }} btn-lg"
+          >
+            {{ .text }}
+          </a>
+        {{- end }}
+      </div>
+
+      {{- with $landing.hero.note }}
+        <p class="text-xs text-muted-foreground">{{ . }}</p>
+      {{- end }}
+    </div>
+
+  </section>
+
+  <!-- ============================================================ Features -->
+  {{- with $landing.features }}
+    <section id="features" class="border-b border-border py-20">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto max-w-2xl text-center">
+          <span class="badge badge-secondary">{{ .eyebrow }}</span>
+          <h2 class="mt-4 text-3xl font-bold tracking-tight text-balance md:text-4xl">
+            {{ .title }}
+          </h2>
+          <p class="mt-3 text-muted-foreground">{{ .subtitle }}</p>
+        </div>
+
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          {{- range .items }}
+            <div class="card reveal">
+              <div
+                class="flex size-10 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary"
+              >
+                {{ partial "icon.html" (dict "name" .icon) }}
+              </div>
+              <h3 class="text-lg font-semibold">{{ .title }}</h3>
+              <p class="text-sm leading-relaxed text-muted-foreground">{{ .text }}</p>
+            </div>
+          {{- end }}
+        </div>
+      </div>
+    </section>
+  {{- end }}
+
+  <!-- ========================================================== How it works -->
+  {{- with $landing.steps }}
+    <section class="border-b border-border bg-muted/30 py-20">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 class="text-3xl font-bold tracking-tight text-balance md:text-4xl">{{ .title }}</h2>
+          <p class="mt-3 text-muted-foreground">{{ .subtitle }}</p>
+        </div>
+
+        <ol class="mx-auto mt-12 grid max-w-5xl gap-8 md:grid-cols-3">
+          {{- range $i, $step := .items }}
+            <li class="relative flex flex-col gap-3">
+              <div
+                class="flex size-8 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground"
+              >
+                {{ add $i 1 }}
+              </div>
+              <h3 class="font-semibold">{{ $step.title }}</h3>
+              <p class="text-sm text-muted-foreground">{{ $step.text }}</p>
+            </li>
+          {{- end }}
+        </ol>
+      </div>
+    </section>
+  {{- end }}
+
+  <!-- ============================================================== Metrics -->
+  {{- with $landing.metrics }}
+    <section class="border-b border-border py-16">
+      <div class="container mx-auto grid gap-8 px-4 sm:grid-cols-2 lg:grid-cols-4">
+        {{- range .items }}
+          <div class="flex flex-col gap-1">
+            <span class="text-3xl font-bold tracking-tight md:text-4xl">{{ .value }}</span>
+            <span class="text-sm text-muted-foreground">{{ .label }}</span>
+          </div>
+        {{- end }}
+      </div>
+    </section>
+  {{- end }}
+
+  <!-- ============================================================== Pricing -->
+  {{- with $landing.pricing }}
+    <section class="border-b border-border py-20">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 class="text-3xl font-bold tracking-tight text-balance md:text-4xl">{{ .title }}</h2>
+          <p class="mt-3 text-muted-foreground">{{ .subtitle }}</p>
+        </div>
+
+        <div class="mx-auto mt-12 grid max-w-5xl gap-6 lg:grid-cols-3">
+          {{- range .tiers }}
+            <div
+              class="card reveal relative {{ if .featured }}border-primary shadow-md{{ end }}"
+            >
+              {{- if .featured }}
+                <span
+                  class="badge badge-default absolute -top-3 left-1/2 -translate-x-1/2"
+                >
+                  Popular
+                </span>
+              {{- end }}
+
+              <div>
+                <h3 class="font-semibold">{{ .name }}</h3>
+                <p class="mt-1 text-sm text-muted-foreground">{{ .description }}</p>
+              </div>
+
+              <div class="flex items-baseline gap-1.5">
+                <span class="text-4xl font-bold tracking-tight">{{ .price }}</span>
+                {{- with .period }}
+                  <span class="text-sm text-muted-foreground">{{ . }}</span>
+                {{- end }}
+              </div>
+
+              <ul class="grid gap-2.5 text-sm">
+                {{- range .features }}
+                  <li class="flex items-start gap-2">
+                    <span class="mt-0.5 shrink-0 text-primary">
+                      {{ partial "icon.html" (dict "name" "check") }}
+                    </span>
+                    <span class="text-muted-foreground">{{ . }}</span>
+                  </li>
+                {{- end }}
+              </ul>
+
+              <a
+                href="{{ .actionUrl | default "#" }}"
+                class="btn {{ if .featured }}btn-default{{ else }}btn-outline{{ end }} mt-auto w-full"
+              >
+                {{ .action | default "Get started" }}
+              </a>
+            </div>
+          {{- end }}
+        </div>
+      </div>
+    </section>
+  {{- end }}
+
+  <!-- ========================================================== Testimonial -->
+  {{- with $landing.testimonial }}
+    <section class="border-b border-border bg-muted/30 py-20">
+      <div class="container mx-auto px-4">
+        <figure class="mx-auto max-w-3xl text-center">
+          <blockquote class="text-xl font-medium text-balance md:text-2xl">
+            {{ .quote }}
+          </blockquote>
+          <figcaption class="mt-6 text-sm text-muted-foreground">
+            <span class="font-medium text-foreground">{{ .author }}</span>
+            {{ with .role }} &middot; {{ . }}{{ end }}
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  {{- end }}
+
+  <!-- ========================================================= Latest posts -->
+  {{- $mainSections := site.Params.mainSections | default (slice "posts") -}}
+  {{- $posts := where site.RegularPages "Type" "in" $mainSections -}}
+  {{- with first 3 $posts }}
+    <section class="py-20">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 class="text-3xl font-bold tracking-tight">{{ site.Params.postsTitle | default "From the blog" }}</h2>
+            <p class="mt-2 text-muted-foreground">
+              Notes on building and running reliable systems.
+            </p>
+          </div>
+          <a href="{{ (printf "/%s" (index $mainSections 0)) | relLangURL }}" class="btn btn-outline">
+            {{ i18n "readMore" | default "Read more" }}
+            {{ partial "icon.html" (dict "name" "arrow-right") }}
+          </a>
+        </div>
+
+        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {{- range . }}
+            {{ partial "post-card.html" . }}
+          {{- end }}
+        </div>
+      </div>
+    </section>
+  {{- end }}
+
+  <!-- ================================================================== CTA -->
+  {{- with $landing.cta }}
+    <section class="border-t border-border py-20">
+      <div class="container mx-auto px-4">
+        <div
+          class="card items-center gap-4 p-10 text-center md:p-16"
+        >
+          <h2 class="text-3xl font-bold tracking-tight text-balance md:text-4xl">{{ .title }}</h2>
+          <p class="max-w-xl text-muted-foreground">{{ .text }}</p>
+          <div class="mt-2 flex flex-col gap-3 sm:flex-row">
+            {{- range .actions }}
+              <a
+                href="{{ .url | relLangURL }}"
+                class="btn {{ .style | default "btn-default" }} btn-lg"
+              >
+                {{ .text }}
+              </a>
+            {{- end }}
+          </div>
+        </div>
+      </div>
+    </section>
+  {{- end }}
+{{ end }}

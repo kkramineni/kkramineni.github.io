@@ -1,0 +1,33 @@
+{{- /* Home page = the blog feed. This page lists every post in
+  params.mainSections.
+*/ -}}
+{{ define "main" }}
+  {{- $mainSections := site.Params.mainSections | default (slice "posts") -}}
+  {{- $pages := where site.RegularPages "Type" "in" $mainSections -}}
+
+  <div class="container mx-auto max-w-7xl px-4 py-12 md:py-16">
+    <div class="grid gap-10 md:grid-cols-[minmax(0,1fr)_16rem] lg:grid-cols-[minmax(0,1fr)_18rem]">
+      <div class="@container">
+        <header class="flex flex-col gap-3">
+          <h1 class="text-3xl font-bold tracking-tight md:text-4xl">
+            {{ .Title | default site.Title }}
+          </h1>
+          {{- with .Description | default site.Params.description }}
+            <p class="text-lg text-muted-foreground">{{ . }}</p>
+          {{- end }}
+          <p class="text-sm text-muted-foreground">
+            {{ len $pages }} {{ i18n "postsCount" | default "posts" }}
+          </p>
+        </header>
+
+        {{- with .Content }}
+          <div class="prose-shadcn mt-6">{{ . }}</div>
+        {{- end }}
+
+        {{ partial "post-list.html" (dict "pages" $pages "page" .) }}
+      </div>
+
+      {{ partial "sidebar.html" . }}
+    </div>
+  </div>
+{{ end }}

@@ -1,0 +1,48 @@
+{{- $year := now.Format "2006" -}}
+<footer class="border-t border-border">
+  <div class="container mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 sm:flex-row sm:items-center sm:justify-between">
+    <p class="text-sm text-muted-foreground">
+      &copy; {{ $year }} {{ site.Params.author | default site.Title }}. All rights reserved.
+    </p>
+
+    <nav class="flex items-center gap-4 text-sm text-muted-foreground" aria-label="Footer">
+      {{- range site.Menus.footer }}
+        <a href="{{ .URL | relLangURL }}" class="transition-colors hover:text-foreground">
+          {{ .Name }}
+        </a>
+      {{- end }}
+
+      {{- with site.Home.OutputFormats.Get "rss" }}
+        <a href="{{ .RelPermalink }}" class="transition-colors hover:text-foreground">RSS</a>
+      {{ end }}
+
+      {{- with site.Params.social }}
+        {{- range $name, $url := . }}
+          {{- if $url }}
+            <a href="{{ $url }}" rel="me noopener" target="_blank" class="transition-colors hover:text-foreground">
+              {{ partial "social-label.html" $name }}
+            </a>
+          {{- end }}
+        {{- end }}
+      {{- end }}
+
+      {{- if site.Params.consent.enabled }}
+        <button
+          type="button"
+          onclick="window.__shadcnConsentOpen__ && window.__shadcnConsentOpen__()"
+          class="transition-colors hover:text-foreground"
+        >
+          Cookie settings
+        </button>
+      {{- end }}
+    </nav>
+  </div>
+
+  {{- with site.Params.footerNote }}
+    <div class="border-t border-border/60">
+      <div class="container mx-auto max-w-7xl px-4 py-4 text-xs text-muted-foreground">
+        {{ . | markdownify }}
+      </div>
+    </div>
+  {{- end }}
+</footer>

@@ -1,0 +1,31 @@
+{{/*
+  Returns the absolute URL of the page cover image, or an empty string.
+  Order: front-matter "cover" > "thumbnail" (hugo-clarity migration) >
+  "images" > page bundle > site default.
+*/}}
+{{- $img := "" -}}
+{{- with .Params.cover -}}
+  {{- $img = . -}}
+{{- else -}}
+  {{- with .Params.thumbnail -}}
+    {{- $img = . -}}
+  {{- else -}}
+    {{- with .Params.images -}}
+      {{- $img = index . 0 -}}
+    {{- else -}}
+      {{- with .Resources.GetMatch "featured*" -}}
+        {{- $img = .Permalink -}}
+      {{- else -}}
+        {{- with .Resources.GetMatch "cover*" -}}
+          {{- $img = .Permalink -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- with $img -}}
+  {{- if not (urls.Parse .).Scheme -}}
+    {{- $img = absURL . -}}
+  {{- end -}}
+{{- end -}}
+{{- $img -}}

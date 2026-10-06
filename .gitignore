@@ -1,0 +1,19 @@
+# Hugo build output
+/public/
+/resources/
+.hugo_build.lock
+
+# Hugo build stats (regenerated on every build)
+/hugo_stats.json
+
+# Dependencies
+/node_modules/
+# package-lock.json must be COMMITTED: CI runs `npm ci`, which is a no-op
+# without it, leaving @tailwindcss/cli uninstalled and failing the build.
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+/.idea/
+/.vscode/
+*.swp

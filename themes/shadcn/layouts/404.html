@@ -1,0 +1,19 @@
+{{ define "main" }}
+  {{- $mainSections := site.Params.mainSections | default (slice "posts") -}}
+  <div class="container mx-auto flex max-w-2xl flex-col items-center gap-6 px-4 py-24 text-center">
+    <p class="font-mono text-sm text-muted-foreground">404</p>
+    <h1 class="text-4xl font-bold tracking-tight text-balance">Page not found</h1>
+    <p class="text-muted-foreground">
+      The page you're looking for doesn't exist or has been moved.
+    </p>
+    <div class="flex flex-col gap-3 sm:flex-row">
+      <a href="{{ "/" | relLangURL }}" class="btn btn-default btn-lg">
+        {{ partial "icon.html" (dict "name" "arrow-left") }}
+        Back home
+      </a>
+      <a href="{{ (printf "/%s" (index $mainSections 0)) | relLangURL }}" class="btn btn-outline btn-lg">
+        Browse posts
+      </a>
+    </div>
+  </div>
+{{ end }}

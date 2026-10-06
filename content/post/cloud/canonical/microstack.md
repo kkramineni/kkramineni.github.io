@@ -15,7 +15,6 @@ thumbnail = "/images/microstack.png"
 series = "Private Cloud"
 +++
 
-![img placeholder](/images/microstack.png " ")
 ##### Microstack
 stack allows you to deploy your own fully functional cloud in minutes.
 

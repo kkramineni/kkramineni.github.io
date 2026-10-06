@@ -1,0 +1,15 @@
+{{- /*
+  Display name for a social key. Both header.html (aria-label) and footer.html
+  (link text) used `title`, which renders "Github" and "Youtube" - both
+  misspell the brands, and `title` turns "x" into "X" and "rss" into "Rss".
+
+  Call with: {{ partial "social-label.html" "github" }}
+*/ -}}
+{{- $labels := dict
+      "x" "X"
+      "github" "GitHub"
+      "youtube" "YouTube"
+      "linkedin" "LinkedIn"
+      "rss" "RSS"
+-}}
+{{- index $labels . | default (. | title) -}}

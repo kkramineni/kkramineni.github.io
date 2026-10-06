@@ -5,7 +5,7 @@ date = "2024-01-01"
 description = ""
 tags = [
     "Cloud",
-    "code hosting & pipeline engine",
+    "code-hosting-pipeline-engine",
     "CICD",
     "PoC",
 

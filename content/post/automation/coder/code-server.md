@@ -1,73 +1,70 @@
 +++
-author = "Kishore"
 title = "How to Install and Configure Code-Server"
+description = "Running VS Code in a browser, with a self-signed or ADCS wildcard certificate for HTTPS."
 date = "2023-09-25"
-description = ""
-tags = [
-    "IaC",
-    "Automation",
-    "Code",
-]
+author = "Kishore"
+tags = ["IaC", "Automation", "Code"]
 categories = "Automation"
 thumbnail = "/images/code-server/code-server.png"
 +++
 
-Run VS Code on any machine anywhere and access it in the browser.
+VS Code on any machine, reachable from a browser. This post covers installing code-server, enabling HTTPS, and pointing it at a wildcard certificate generated in Active Directory Certificate Services.
 
+## Why I use it
 
-### Why I Use Coder?
-* Code on any device with a consistent development environment
-* Accessible from Browser
-* Microsoft VS Code extensions will work
+- A consistent development environment from any device
+- No local install — everything runs on the server
+- Microsoft VS Code extensions work as they do locally
 
+## System requirements
 
+At minimum:
 
-### System Requirements
+- 1 GB RAM
+- 2 CPU cores
 
-At the minimum, the recommendation is :
+## Installation
 
-* 1 GB of RAM
-* 2 CPU cores
-
-### Installation
-
-To install, run:
-```
+```shell
 curl -fsSL https://code-server.dev/install.sh | sh
 sudo systemctl enable --now code-server@$USER
 ```
 
-Post installation check the service status
+Check the service status afterwards:
 
-```
+```shell
 sudo systemctl status code-server@$USER
 ```
-Modify the config parameters to use *https*
-```
+
+To serve over HTTPS, edit the config file:
+
+```shell
 vi ~/.config/code-server/config.yaml
 ```
 
-{{% notice tip "modify the vaules to" %}}
-* Change the bind address to **0.0.0.0:8080**
-* Change the password
-* cert to **true** from *false*
+{{% notice tip "Config values to change" %}}
+
+- Set `bind-addr` to **0.0.0.0:8080**
+- Set the `password`
+- Set `cert` to **true**
+
 {{% /notice %}}
 
-Post change the config file looks like this:
-```
+After those changes the file looks like this:
+
+```yaml
 bind-addr: 0.0.0.0:8080
 auth: password
 password: SuperStrongPassword
 cert: true
 ```
-### Using the AD Certificate Services generated certificate with Code-Server
 
-I have created a wild card SSL certificate in ADCS, to use for other requirements, where SSL Encryption is required.
+## Using an ADCS-generated certificate
 
-### Watch the video on How to Install Code-Server, Generate Wild Card SSL certificate and Use it with Code-Server
+I created a wildcard SSL certificate in ADCS for other requirements where SSL encryption is needed, and reused it here.
+
+## Watch the video
+
+How to install code-server, generate a wildcard SSL certificate, and use it with code-server:
 
 {{< youtube u7AK-Fk4JRE >}}
-
-<br>
-
-

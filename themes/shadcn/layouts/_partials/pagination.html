@@ -1,0 +1,35 @@
+{{- with .Paginator -}}
+  {{- if gt .TotalPages 1 -}}
+    <nav class="mt-10 flex items-center justify-center gap-1" aria-label="Pagination">
+      <a
+        href="{{ with .Prev }}{{ .URL }}{{ else }}#{{ end }}"
+        class="btn btn-outline btn-icon {{ if not .Prev }}pointer-events-none opacity-50{{ end }}"
+        aria-label="Previous page"
+        aria-disabled="{{ if not .Prev }}true{{ end }}"
+      >
+        {{ partial "icon.html" (dict "name" "arrow-left") }}
+      </a>
+
+      {{- range .Pagers -}}
+        {{- $isCurrent := eq . $ -}}
+        <a
+          href="{{ .URL }}"
+          class="btn {{ if $isCurrent }}btn-default{{ else }}btn-ghost{{ end }} btn-sm min-w-9"
+          aria-label="Page {{ .PageNumber }}"
+          {{ if $isCurrent }}aria-current="page"{{ end }}
+        >
+          {{ .PageNumber }}
+        </a>
+      {{- end -}}
+
+      <a
+        href="{{ with .Next }}{{ .URL }}{{ else }}#{{ end }}"
+        class="btn btn-outline btn-icon {{ if not .Next }}pointer-events-none opacity-50{{ end }}"
+        aria-label="Next page"
+        aria-disabled="{{ if not .Next }}true{{ end }}"
+      >
+        {{ partial "icon.html" (dict "name" "arrow-right") }}
+      </a>
+    </nav>
+  {{- end -}}
+{{- end -}}

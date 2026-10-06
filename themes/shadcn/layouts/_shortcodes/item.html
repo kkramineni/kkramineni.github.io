@@ -1,0 +1,26 @@
+{{- /*
+  One accordion entry, nested inside an accordion shortcode.
+  Use open="true" to expand by default.
+*/ -}}
+{{- $title := .Get "title" | default "Details" -}}
+{{- $open := .Get "open" | default false -}}
+<details class="accordion-item group" {{ if $open }}open{{ end }} data-no-dismiss>
+  <summary class="accordion-trigger">
+    <span>{{ $title }}</span>
+    <svg
+      class="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  </summary>
+  <div class="accordion-content">
+    {{- .Inner | strings.TrimSpace | $.Page.RenderString (dict "display" "block") -}}
+  </div>
+</details>

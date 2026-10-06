@@ -1,0 +1,43 @@
+{{- /*
+  YouTube embed — ported from the hugo-clarity theme.
+
+    {{< youtube dQw4w9WgXcQ >}}
+
+  Accepts a bare video ID, or any of the URL shapes YouTube hands out
+  (watch?v=, youtu.be/, /embed/, /shorts/). Responsive 16:9 via aspect-ratio so
+  it needs no wrapper height hack.
+*/ -}}
+{{- $raw := trim (or (.Get 0) (.Get "id") (.Get "url") "") " " -}}
+{{- $id := "" -}}
+{{- if or (hasPrefix $raw "http://") (hasPrefix $raw "https://") -}}
+  {{- $u := urls.Parse $raw -}}
+  {{- if in $u.Host "youtu.be" -}}
+    {{- $id = path.Base $u.Path -}}
+  {{- else if in $u.Host "www.youtube.com" "youtube.com" "m.youtube.com" "music.youtube.com" -}}
+    {{- with $u.Query.Get "v" -}}
+      {{- $id = . -}}
+    {{- else -}}
+      {{- $parts := split $u.Path "/" -}}
+      {{- if in (slice "embed" "shorts" "v" "live") (index $parts 1) -}}
+        {{- $id = index $parts 2 -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- $id = $raw -}}
+{{- end -}}
+
+{{- with $id }}
+  <div class="not-prose my-6 aspect-video w-full overflow-hidden rounded-lg border bg-muted">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/{{ . }}?rel=0"
+      title="YouTube video"
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      class="size-full border-0"
+    ></iframe>
+  </div>
+{{- else -}}
+  {{- errorf "[shadcn theme] youtube shortcode: could not parse a video ID from %q" $raw -}}
+{{- end }}

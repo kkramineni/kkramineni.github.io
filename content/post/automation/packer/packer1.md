@@ -1,72 +1,62 @@
 +++
-author = "Kishore"
-title = "How to setup Packer"
+title = "How to Setup Packer"
+description = "Installing Packer on Rocky Linux from the HashiCorp RPM repository, including the cracklib conflict that breaks the default package."
 date = "2023-10-20"
-description = ""
-tags = [
-    "IaC",
-    "Automation",
-    "Linux",
-    "packer",
-    "Home Lab",
-]
+author = "Kishore"
+tags = ["IaC", "Automation", "Linux", "packer", "Home Lab"]
 categories = "Automation"
 thumbnail = "/images/packer.png"
 series = "packer"
 +++
 
-![img placeholder](/images/packer.png " ")
-##### What is Packer?
-Packer is a tool that lets you create identical machine images for multiple platforms from a single source template. Packer can create golden images to use in image pipelines.
+## What is Packer?
 
-In this tutorial we will see how to install and get started with Packer on Rocky Linux.
+Packer builds identical machine images for multiple platforms from a single source template. That makes it a good fit for golden images in an image pipeline — build once, deploy the same artifact everywhere.
 
-### Install Packer
----
+This post covers installing Packer on Rocky Linux and verifying the setup.
 
+## Install Packer
 
+{{% notice warning "The cracklib conflict" %}}
 
-{{% notice warning "HashiCorp packer conflict with cracklib gotcha" %}}
-While setting up packer for the first time, packer installation conflicts with packer lib, which will be installed by default in RHEL based distros
+On RHEL-based distributions, Packer's RPM collides with the `packer` library shipped by `cracklib`, which is already installed. The transaction fails with a file conflict.
 
-workaround:
+The workaround is to unlink the conflicting binary, then reboot:
+
 ```
 unlink /usr/sbin/packer
 ```
-reboot the Server
+
 {{% /notice %}}
 
----
-Login to the code server as root, run the floowing commands
+Log in to the code server as `root` and install the repository tools:
 
 ```shell
 yum install -y yum-utils
 ```
 
-![img placeholder](/images/packer/packer-001.png " ")
+![Installing yum-utils](/images/packer/packer-001.png)
 
-
-add the hashicorp repo
+Add the HashiCorp repository:
 
 ```shell
 yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 ```
-![img placeholder](/images/packer/packer-002.png " ")
 
-Install packer
+![Adding the HashiCorp repository](/images/packer/packer-002.png)
+
+Install Packer:
 
 ```shell
 sudo yum -y install packer
 ```
 
-![img placeholder](/images/packer/packer-003.png " ")
+![Installing Packer](/images/packer/packer-003.png)
 
-validate the packer installation by running
+Verify the installation:
 
-``` shell
+```shell
 packer version
 ```
-![img placeholder](/images/packer/packer-004.png " ")
 
-
-
+![Verifying the Packer version](/images/packer/packer-004.png)

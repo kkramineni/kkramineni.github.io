@@ -1,57 +1,52 @@
 +++
-author = "Kishore"
 title = "How to Install and Configure Ansible AWX on Rocky Linux 8"
+description = "Deploying the AWX operator into a K3s cluster with Kustomize, then creating an AWX instance as a NodePort service."
 date = "2023-10-08"
-description = ""
-tags = [
-    "AWX",
-    "Automation",
-    "Linux",
-    "Ansible",
-    "Home Lab",
-]
+author = "Kishore"
+tags = ["AWX", "Automation", "Linux", "Ansible", "Home Lab"]
 categories = "Automation"
 thumbnail = "/images/awx/awx_logo.png"
 +++
 
-AWX stands for “Ansible Web eXecutable” is a free and open-source project that allows you to easily manage and control Ansible projects. AWX is the upstream project of Red Hat Ansible Automation Platform. AWX provides a web-based user interface, a powerful REST API and allows to manage or sync inventory with other cloud sources
-### Install AWX Operator Installtion on K3S
-![img placeholder](/images/awx/awx_logo.png " ")
+AWX — "Ansible Web eXecutable" — is a free, open-source project for managing and controlling Ansible projects. It provides a web UI and a REST API, and can sync inventory from other sources. It's the upstream project behind Red Hat's Ansible Automation Platform.
 
-The open source projects Ansible and AWX, is a task engine and Web interface for scheduling and running playbook tasks on the inventories the playbooks interact with.
+Ansible itself is the task engine; AWX is the web interface for scheduling and running playbooks against the inventories those playbooks act on.
 
-In this tutorial, we will install and configure Ansible AWX operator on Rocky Linux 8
+In this post I'll install the AWX operator on Rocky Linux 8 and deploy an instance into a K3s cluster.
+
+## Prerequisites
 
 {{% notice tip "Steps involved" %}}
-1. Install Rocky Linux 8.x or CentOS 8.x server with a minimum of 4 GB RAM.
-2. Install K3S
-3. Install AWX operator on K3s
+
+1. A Rocky Linux 8.x or CentOS 8.x server with at least 4 GB RAM
+2. A running K3s cluster
+3. The AWX operator deployed into that cluster
+
 {{% /notice %}}
 
-Refer to this post for K3S installation <a href="https://cloudbricks.dev/post/containers/k3s/k3s-01/">Install K3S</a>
+For K3s installation, see [Install K3S](/post/containers/k3s/k3s-01/).
 
+## Install the AWX operator
 
-Once we have a running kubernetes cluster( in this case K3s), we can deploy AWX Operator into the cluster using <a href= "https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/"> Kustomize. </a>
-
-### Install AWX Operator:
-
-Install pre-requisites with the following command
+Install the prerequisites:
 
 ```shell
 sudo yum -y install git make
 ```
 
-![img placeholder](/images/awx/awx_001.png " ")
+![Installing prerequisites](/images/awx/awx_001.png)
 
+With a running Kubernetes cluster — K3s in this case — you can deploy the AWX operator using [Kustomize](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/).
 
-Manually create a file called **kustomization.yaml** with the following content:
+Create a file called **kustomization.yaml**:
 
 ```shell
 vi kustomization.yaml
 ```
-Find the latest tag here: https://github.com/ansible/awx-operator/releases. *In this case, I have used 2.6.0*
 
-```shell
+Check the [awx-operator releases](https://github.com/ansible/awx-operator/releases) page for the latest tag — 2.6.0 is used here:
+
+```yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
@@ -62,26 +57,31 @@ images:
 namespace: awx
 ```
 
-![img placeholder](/images/awx/awx_002.png " ")
+![The kustomization.yaml file](/images/awx/awx_002.png)
 
-Install the manifests by running this
+Apply the manifests:
 
-``` shell
+```shell
 kubectl apply -k .
 ```
-![img placeholder](/images/awx/awx_003.png " ")
-Wait a bit until the awx-operator running. we can check this by running
+
+![Applying the manifests](/images/awx/awx_003.png)
+
+Wait until the awx-operator is running, then check:
 
 ```shell
 kubectl get pods -n awx
 ```
 
-Manually create a file called **awx-lab.yaml**
+## Create an AWX instance
+
+Create a file called **awx-lab.yaml**:
+
 ```shell
 vi awx-lab.yaml
 ```
-in awx-lab.yaml, copy the below content
-```shell
+
+```yaml
 ---
 apiVersion: awx.ansible.com/v1beta1
 kind: AWX
@@ -91,11 +91,11 @@ spec:
   service_type: nodeport
 ```
 
-![img placeholder](/images/awx/awx_004.png " ")
+![The awx-lab.yaml file](/images/awx/awx_004.png)
 
-Make sure to add this new file to the list of "resources" in  **kustomization.yaml** file
+Add that file to the `resources` list in **kustomization.yaml**:
 
-```shell
+```yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
@@ -106,52 +106,57 @@ images:
     newTag: 2.6.0
 namespace: awx
 ```
-![img placeholder](/images/awx/awx_005.png " ")
 
-Finally, apply the changes to create the AWX instance in the cluster
+![The updated kustomization.yaml](/images/awx/awx_005.png)
 
-``` shell
-kubectl apply -k .
-```
-We don't have to keep repeating -n awx, let's set the current namespace for kubectl:
+Apply the changes to create the AWX instance. Since you're done passing `-n awx`, set it as the current namespace:
 
 ```shell
 kubectl config set-context --current --namespace=awx
 ```
 
-After few minutes, the new AWX instance will be deployed. we can check the logs using the following command, in order to know where the installation process is at
+```shell
+kubectl apply -k .
 ```
+
+## Verify the deployment
+
+After a few minutes the instance is deployed. Follow the logs to watch the install progress:
+
+```shell
 kubectl logs -f deployments/awx-operator-controller-manager -c awx-manager
 ```
 
+Within a few seconds the operator should begin creating resources:
 
-After few seconds, we should see the operator begin to create new resources
-```
+```shell
 kubectl get pods -l "app.kubernetes.io/managed-by=awx-operator"
 ```
-![img placeholder](/images/awx/awx_007.png " ")
 
+![Pods managed by the AWX operator](/images/awx/awx_007.png)
 
-Get the Node port details by running the following command
-```
+Get the NodePort details:
+
+```shell
 kubectl get svc -l "app.kubernetes.io/managed-by=awx-operator"
 ```
-![img placeholder](/images/awx/awx_008.png " ")
 
-By default, the admin user is admin and the password is available in the <resourcename>-admin-password secret. To retrieve the admin password, run
+![Service details including the NodePort](/images/awx/awx_008.png)
 
-```
+By default the admin username is `admin`, and the password is stored in the `<resourcename>-admin-password` secret:
+
+```shell
 kubectl get secret awx-demo-admin-password -o jsonpath="{.data.password}" | base64 --decode ; echo
 ```
 
-![img placeholder](/images/awx/awx_009.png " ")
+![Retrieving the admin password](/images/awx/awx_009.png)
 
-Launch the URL using the <<hostname:port>>, and login the with admin/password noted with above command
+Open `http://<hostname>:<port>` and log in with `admin` and that password.
 
-![img placeholder](/images/awx/awx_010.png " ")
+![The AWX login page](/images/awx/awx_010.png)
 
-### Watch the video on How to Setup AWX Operator in K3S cluster
+## Watch the video
+
+Setting up the AWX operator in a K3s cluster:
 
 {{< youtube zlLKCb4DdEw >}}
-
-<br>

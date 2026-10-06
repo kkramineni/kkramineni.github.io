@@ -1,0 +1,46 @@
+{{- /*
+  Card — mirrors shadcn <Card>.
+
+  {{< card title="Anomaly detection" icon="sparkles" >}}
+  Body text goes here.
+  {{< /card >}}
+
+  Params: title, description, icon, href, class, sm (compact).
+*/ -}}
+{{- $title := .Get "title" -}}
+{{- $icon := .Get "icon" -}}
+{{- $href := .Get "href" -}}
+{{- $compact := .Get "sm" | default false -}}
+{{- $class := .Get "class" | default "" -}}
+{{- $body := .Inner | strings.TrimSpace -}}
+
+{{- $tag := "div" -}}
+{{- $attrs := "" -}}
+{{- if $href -}}
+  {{- $tag = "a" -}}
+  {{- $attrs = printf ` href="%s"` ($href | relURL) -}}
+{{- end -}}
+
+<{{ $tag }} class="card {{ if $compact }}card-sm{{ end }} {{ $class }}"{{ $attrs | safeHTML }}>
+  {{- with $icon }}
+    <div
+      class="flex size-10 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary"
+    >
+      {{ partial "icon.html" (dict "name" .) }}
+    </div>
+  {{- end }}
+
+  {{- with $title }}
+    <h3 class="text-lg font-semibold tracking-tight">{{ . }}</h3>
+  {{- end }}
+
+  {{- with .Get "description" }}
+    <p class="text-sm leading-relaxed text-muted-foreground">{{ . }}</p>
+  {{- end }}
+
+  {{- with $body }}
+    <div class="text-sm leading-relaxed text-muted-foreground [&>p]:mt-0 [&>p:last-child]:mb-0">
+      {{ . | $.Page.RenderString (dict "display" "block") }}
+    </div>
+  {{- end }}
+</{{ $tag }}>

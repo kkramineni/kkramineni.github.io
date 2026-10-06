@@ -1,0 +1,66 @@
+{{ define "main" }}
+  {{- $series := .GetTerms "series" -}}
+  <article
+    class="container mx-auto {{ if $series }}max-w-6xl{{ else }}max-w-4xl{{ end }} px-4 py-12 md:py-16"
+    data-pagefind-body
+  >
+    <div class="{{ if $series }}grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]{{ end }}">
+      <div class="{{ if $series }}@container{{ end }}">
+        <header class="flex flex-col gap-3">
+          <h1
+            class="text-3xl font-bold tracking-tight text-balance md:text-4xl"
+            data-pagefind-meta="title"
+          >
+            {{ .Title }}
+          </h1>
+
+          {{- with .Description }}
+            <p class="text-lg text-pretty text-muted-foreground">{{ . }}</p>
+          {{- end }}
+
+          {{- if not .Date.IsZero }}
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+              {{- with .Params.author | default site.Params.author }}
+                <span>{{ . }}</span>
+                <span aria-hidden="true">&middot;</span>
+              {{- end }}
+              <time datetime="{{ .Date.Format "2006-01-02" }}">
+                {{ .Date | time.Format (site.Params.dateFormat | default ":date_medium") }}
+              </time>
+              <span aria-hidden="true">&middot;</span>
+              <span>{{ .ReadingTime }} min read</span>
+              {{- if gt .Lastmod .Date }}
+                <span aria-hidden="true">&middot;</span>
+                <span>Updated {{ .Lastmod | time.Format (site.Params.dateFormat | default ":date_medium") }}</span>
+              {{- end }}
+            </div>
+          {{- end }}
+        </header>
+
+        {{- /* No cover hero here on purpose. The front-matter cover is a logo,
+             and showing it above the body duplicated it on every post that
+             already opens with a screenshot. The cover still drives the card
+             thumbnail on the homepage, section lists and term pages via
+             post-card.html, so only the in-page hero is dropped. */ -}}
+
+        {{- if .Params.tags }}
+          <div class="mt-6 flex flex-wrap gap-1.5">
+            {{- range .Params.tags }}
+              <a href="{{ (printf "/tags/%s" (urlize .)) | relLangURL }}" class="badge badge-tag" style="--tag-accent: {{ partial "func/tag-color.html" . | safeCSS }}">
+                {{ . }}
+              </a>
+            {{- end }}
+          </div>
+        {{- end }}
+
+        <div class="prose-shadcn mt-8">
+          {{ .Content }}
+        </div>
+
+        {{ partial "post-footer.html" . }}
+      </div>
+
+      {{ partial "series-nav.html" . }}
+    </div>
+  </article>
+{{ end }}

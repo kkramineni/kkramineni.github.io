@@ -1,0 +1,15 @@
+{
+  "name": "aiops-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hugo site assets pipeline (Tailwind CSS v4)",
+  "scripts": {
+    "build": "hugo --gc --minify",
+    "dev": "hugo server --buildDrafts"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "@tailwindcss/typography": "^0.5.20",
+    "tailwindcss": "^4.3.3"
+  }
+}

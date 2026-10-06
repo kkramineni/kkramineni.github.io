@@ -1,0 +1,48 @@
+{{- /* Post card used on the homepage feed, section lists and term pages. */ -}}
+{{- $cover := partial "func/cover-image.html" . -}}
+<article
+  class="group card card-sm overflow-hidden transition-shadow hover:shadow-md"
+>
+  {{- with $cover }}
+    <a href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true" class="block overflow-hidden">
+      <img
+        src="{{ . }}"
+        alt=""
+        loading="lazy"
+        decoding="async"
+        class="h-24 w-full object-contain bg-transparent transition-transform duration-300 group-hover:scale-[1.02]"
+      />
+    </a>
+  {{- end }}
+
+  <div class="flex flex-col gap-2">
+    <div class="flex items-center gap-2 text-xs text-muted-foreground">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ .Date | time.Format (site.Params.dateFormat | default ":date_medium") }}
+      </time>
+    </div>
+
+    <h3 class="line-clamp-2 text-lg leading-snug font-semibold tracking-tight">
+      <a href="{{ .RelPermalink }}" class="transition-colors group-hover:text-primary">
+        {{ .Title }}
+      </a>
+    </h3>
+
+    {{- /* Prefer the explicit description; fall back to an auto-generated
+       summary so cards never render without any preview text. */ -}}
+    {{- $blurb := .Description | default (.Summary | plainify) -}}
+    {{- with $blurb }}
+      <p class="line-clamp-2 text-sm text-muted-foreground">{{ . | truncate 160 }}</p>
+    {{- end }}
+
+    {{- with .Params.tags }}
+      <div class="flex flex-wrap gap-1.5 pt-1">
+        {{- range first 3 . }}
+          <a href="{{ (printf "/tags/%s" (urlize .)) | relLangURL }}" class="badge badge-tag" style="--tag-accent: {{ partial "func/tag-color.html" . | safeCSS }}">
+            {{ . }}
+          </a>
+        {{- end }}
+      </div>
+    {{- end }}
+  </div>
+</article>

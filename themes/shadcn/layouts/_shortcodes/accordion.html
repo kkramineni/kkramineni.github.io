@@ -1,0 +1,11 @@
+{{- /*
+  Accordion — mirrors shadcn <Accordion>. Uses native <details> so it works
+  with no JavaScript.
+
+  {{< accordion >}}
+  {{< item title="What does it do?" >}}...{{< /item >}}
+  {{< /accordion >}}
+*/ -}}
+<div class="accordion my-6">
+  {{- .Inner -}}
+</div>

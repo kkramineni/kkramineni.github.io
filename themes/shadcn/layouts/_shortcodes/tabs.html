@@ -1,0 +1,16 @@
+{{- /*
+  Tabs — mirrors shadcn <Tabs>. Pair with the tab shortcode:
+
+  {{< tabs >}}
+  {{< tab title="npm" >}} ... {{< /tab >}}
+  {{< tab title="pnpm" >}} ... {{< /tab >}}
+  {{< /tabs >}}
+
+  tab.html emits each label and panel as siblings of this container. The
+  container is a wrapping flex box whose `order` puts every label on the first
+  row and each panel on its own full-width row, so the two never need to be
+  split apart — and no unique IDs are required.
+*/ -}}
+<div data-tabs class="tabs">
+  {{- .Inner -}}
+</div>

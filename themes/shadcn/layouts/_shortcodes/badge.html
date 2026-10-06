@@ -1,0 +1,11 @@
+{{- /*
+  Badge — mirrors shadcn <Badge>.
+
+  {{< badge "New" variant="secondary" >}}
+*/ -}}
+{{- $label := .Get "text" -}}
+{{- if not $label -}}
+  {{- with .Inner -}}{{- $label = . | strings.TrimSpace -}}{{- end -}}
+{{- end -}}
+{{- $variant := .Get "variant" | default "default" -}}
+<span class="badge badge-{{ $variant }} {{ .Get "class" | default "" }}">{{ $label | safeHTML }}</span>

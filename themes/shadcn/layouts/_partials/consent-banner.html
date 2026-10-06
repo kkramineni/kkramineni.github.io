@@ -1,0 +1,86 @@
+{{- /*
+  Cookie / consent banner. Gated on params.consent.enabled.
+
+  Deliberately inline rather than bundled into main.js: the visitor has to be
+  able to answer before ad storage is granted, and a deferred bundle would run
+  after Google has already made its first request.
+
+  Deliberately not a Google-certified CMP. It satisfies the two things that
+  matter in practice - no ad or analytics storage is granted before the visitor
+  chooses, and Consent Mode v2 signals are sent - but if you need certification
+  rather than just compliance, swap this for a certified CMP and keep the
+  consent bootstrap in head.html, which is provider-agnostic.
+*/ -}}
+{{- if site.Params.consent.enabled -}}
+<div
+  id="shadcn-consent"
+  class="fixed inset-x-0 bottom-0 z-50 hidden"
+  role="dialog"
+  aria-modal="false"
+  aria-labelledby="shadcn-consent-title"
+>
+  <div class="border-t border-border bg-popover text-popover-foreground shadow-lg">
+    <div
+      class="container mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <div class="max-w-2xl">
+        <p id="shadcn-consent-title" class="font-semibold">This site uses cookies</p>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Google AdSense and Google Analytics are used to measure traffic and serve ads. Declining
+          still shows non-personalised, contextual ads and blocks analytics. You can change your
+          choice at any time from the link in the footer.
+        </p>
+      </div>
+      <div class="flex shrink-0 gap-2">
+        <button type="button" data-consent="denied" class="btn btn-outline btn-sm">Decline</button>
+        <button type="button" data-consent="granted" class="btn btn-default btn-sm">Accept</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var KEY = "shadcn-consent";
+    var banner = document.getElementById("shadcn-consent");
+    if (!banner) { return; }
+
+    function granted() {
+      return {
+        ad_storage: "granted", ad_user_data: "granted",
+        ad_personalization: "granted", analytics_storage: "granted"
+      };
+    }
+    function denied() {
+      return {
+        ad_storage: "denied", ad_user_data: "denied",
+        ad_personalization: "denied", analytics_storage: "denied"
+      };
+    }
+
+    function show() { banner.classList.remove("hidden"); }
+    function hide() { banner.classList.add("hidden"); }
+
+    // No stored choice yet - ask. This runs on every page load until answered.
+    var stored = null;
+    try { stored = window.localStorage.getItem(KEY); } catch (e) {}
+    if (stored !== "granted" && stored !== "denied") { show(); }
+
+    // Re-opened from the footer. Downgrade to denied first so withdrawing is
+    // as easy as granting, then show the prompt again.
+    window.__shadcnConsentOpen__ = function () {
+      try { window.localStorage.setItem(KEY, "denied"); } catch (e) {}
+      window.gtag("consent", "update", denied());
+      show();
+    };
+
+    banner.addEventListener("click", function (e) {
+      var choice = e.target && e.target.getAttribute && e.target.getAttribute("data-consent");
+      if (choice !== "granted" && choice !== "denied") { return; }
+      try { window.localStorage.setItem(KEY, choice); } catch (err) {}
+      window.gtag("consent", "update", choice === "granted" ? granted() : denied());
+      hide();
+    });
+  })();
+</script>
+{{- end -}}

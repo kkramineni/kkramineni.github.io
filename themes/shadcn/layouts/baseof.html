@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="{{ site.Language.Lang }}" class="scroll-smooth">
+  <head>
+    {{ partial "head.html" . }}
+    {{/* Deferred so Tailwind sees classes from every template in the build. */}}
+    {{ with (templates.Defer (dict "key" "global")) }}
+      {{ partial "head/css.html" . }}
+    {{ end }}
+  </head>
+  <body class="flex min-h-svh flex-col">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+    >
+      {{ i18n "skipToContent" | default "Skip to content" }}
+    </a>
+
+    {{ partial "header.html" . }}
+
+    {{/* Pagefind indexes only single pages (posts). Listing pages, archives,
+         the 404 and this search page would otherwise show up as thin,
+         duplicate results. */}}
+    <main id="main" class="flex-1"{{ if not .IsPage }} data-pagefind-ignore{{ end }}>
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    {{ partial "footer.html" . }}
+
+    {{ partial "consent-banner.html" . }}
+
+    {{ partial "head/js.html" . }}
+  </body>
+</html>

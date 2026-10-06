@@ -1,0 +1,29 @@
+{{- /*
+  In-content AdSense unit.
+
+  Usage:  {{< ad >}}
+
+  Auto-ads already place units without this. Use the shortcode only when you
+  want a unit at a specific point in an article, e.g. after the intro or
+  between sections.
+
+  Renders nothing unless params.adsense.slot is set in hugo.toml, so adding
+  the shortcode before a slot exists will not emit a broken ad element.
+  Auto-ads carry on working either way.
+*/ -}}
+{{- $ads := site.Params.adsense | default dict -}}
+{{- with $ads.client -}}
+  {{- $slot := $ads.slot | default "" -}}
+  {{- if $slot -}}
+    <ins
+      class="adsbygoogle my-8 block"
+      data-ad-client="{{ $ads.client }}"
+      data-ad-slot="{{ $slot }}"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  {{- end -}}
+{{- end -}}

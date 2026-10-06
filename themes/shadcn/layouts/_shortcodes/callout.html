@@ -1,0 +1,27 @@
+{{- /*
+  Callout — alias of the alert shortcode.
+
+  {{< callout title="Note" variant="info" >}}...{{< /callout >}}
+*/ -}}
+{{- $variant := .Get "variant" | default "info" -}}
+{{- $title := .Get "title" -}}
+{{- $body := .Inner | strings.TrimSpace -}}
+
+{{- $icon := "info" -}}
+{{- if eq $variant "warning" -}}{{- $icon = "triangle-alert" -}}{{- end -}}
+{{- if eq $variant "destructive" -}}{{- $icon = "triangle-alert" -}}{{- end -}}
+{{- if eq $variant "success" -}}{{- $icon = "check" -}}{{- end -}}
+
+<div class="alert border-primary/40 bg-primary/5 text-primary my-6">
+  {{ partial "icon.html" (dict "name" $icon) }}
+  <div class="col-start-2 grid gap-1">
+    {{- with $title }}
+      <div class="font-medium tracking-tight">{{ . }}</div>
+    {{- end }}
+    {{- with $body }}
+      <div class="text-sm leading-relaxed [&>p]:mt-0 [&>p:last-child]:mb-0">
+        {{ . | $.Page.RenderString (dict "display" "block") }}
+      </div>
+    {{- end }}
+  </div>
+</div>

@@ -1,0 +1,33 @@
+{{- /*
+  Design variants. Each is a standalone entry point under assets/css, so only
+  the selected one is compiled — they cannot leak tokens into each other.
+
+    shadcn (default) — upstream shadcn/ui zinc tokens, Inter, oklch
+    kish             — look: Manrope, navy/blue, 8px radius
+
+  Switch with `design = 'kish'` in hugo.toml.
+*/ -}}
+{{- $design := site.Params.design | default "shadcn" -}}
+{{- $entries := slice "shadcn" "kish" -}}
+{{- if not (in $entries $design) -}}
+  {{- errorf "[shadcn theme] unknown design %q in hugo.toml — expected one of %s" $design (delimit $entries ", ") -}}
+{{- end -}}
+
+{{- $path := printf "css/%s.css" $design -}}
+{{- $src := resources.Get $path -}}
+{{- if not $src -}}
+  {{- errorf "[shadcn theme] stylesheet not found: assets/%s (design = %q). Restart `hugo server` if the theme was recently restructured." $path $design -}}
+{{- end -}}
+
+{{- with $src -}}
+  {{- $opts := dict "minify" (not hugo.IsDevelopment) -}}
+  {{- with . | css.TailwindCSS $opts -}}
+    {{- if hugo.IsDevelopment -}}
+      <link rel="stylesheet" href="{{ .RelPermalink }}" />
+    {{- else -}}
+      {{- with . | fingerprint -}}
+        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" />
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

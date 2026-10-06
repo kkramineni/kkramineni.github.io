@@ -1,0 +1,263 @@
+/*
+ * components.css — shadcn/ui component recipes expressed as semantic classes,
+ * so Hugo templates stay readable. Each maps 1:1 to the upstream React
+ * component (variants and all) and is driven purely by the tokens in shadcn.css.
+ */
+
+@layer components {
+  /* ---------------------------------------------------------------- Button */
+  .btn {
+    @apply inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap
+      rounded-md text-sm font-medium outline-none transition-[color,box-shadow,background-color]
+      focus-visible:ring-[3px] focus-visible:ring-ring/50
+      disabled:pointer-events-none disabled:opacity-50
+      [&_svg]:pointer-events-none [&_svg:not([class*="size-"])]:size-4;
+  }
+
+  .btn-default {
+    @apply bg-primary text-primary-foreground shadow-xs hover:bg-primary/90;
+  }
+
+  .btn-destructive {
+    @apply bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90
+      focus-visible:ring-destructive/30;
+  }
+
+  .btn-outline {
+    @apply border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground
+      focus-visible:ring-accent;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80;
+  }
+
+  .btn-ghost {
+    @apply hover:bg-accent hover:text-accent-foreground;
+  }
+
+  .btn-link {
+    @apply text-primary underline-offset-4 hover:underline;
+  }
+
+  /* Sizes mirror shadcn's size-{sm,default,lg,icon}. */
+  .btn-sm {
+    @apply h-8 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5;
+  }
+
+  .btn-md {
+    @apply h-9 gap-2 px-4 py-2 has-[>svg]:px-3;
+  }
+
+  .btn-lg {
+    @apply h-10 gap-2 rounded-md px-6 has-[>svg]:px-4;
+  }
+
+  .btn-icon {
+    @apply size-9;
+  }
+
+  /* ------------------------------------------------------------------ Card */
+  /* Horizontal padding lives here, not on each usage — otherwise every card's
+     content sits flush against its left and right borders. Override per card
+     with p-0 / p-8 / whatever the layout needs. */
+  .card {
+    @apply flex flex-col gap-6 rounded-xl border bg-card p-6 text-card-foreground shadow-sm;
+  }
+
+  .card-sm {
+    @apply gap-4 p-4;
+  }
+
+  /* ----------------------------------------------------------------- Badge */
+  .badge {
+    @apply inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden
+      rounded-md border px-2 py-0.5 text-xs font-medium whitespace-nowrap
+      transition-colors [&>svg]:size-3;
+  }
+
+  .badge-default {
+    @apply border-transparent bg-primary text-primary-foreground;
+  }
+
+  .badge-secondary {
+    @apply border-transparent bg-secondary text-secondary-foreground;
+  }
+
+  .badge-destructive {
+    @apply border-transparent bg-destructive text-destructive-foreground;
+  }
+
+  .badge-outline {
+    @apply text-foreground;
+  }
+
+  /* Tag chip — uses --tag-accent (set inline per tag from func/tag-color.html)
+     so each tag keeps its own colour on every post. */
+  .badge-tag {
+    @apply transition-colors;
+    border-color: color-mix(in oklch, var(--tag-accent) 25%, transparent);
+    background-color: color-mix(in oklch, var(--tag-accent) 10%, transparent);
+    color: color-mix(in oklch, var(--tag-accent) 72%, oklch(30% 0.01 285));
+  }
+
+  .badge-tag:hover {
+    background-color: color-mix(in oklch, var(--tag-accent) 15%, transparent);
+  }
+
+  .dark .badge-tag {
+    border-color: color-mix(in oklch, var(--tag-accent) 30%, transparent);
+    background-color: color-mix(in oklch, var(--tag-accent) 15%, transparent);
+    color: color-mix(in oklch, var(--tag-accent) 80%, oklch(96% 0 0));
+  }
+
+  .dark .badge-tag:hover {
+    background-color: color-mix(in oklch, var(--tag-accent) 20%, transparent);
+  }
+
+  /* ----------------------------------------------------------------- Alert */
+  .alert {
+    @apply relative grid w-full grid-cols-[0_1fr] items-start gap-y-0.5 rounded-lg border
+      px-4 py-3 text-sm has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr]
+      has-[>svg]:gap-x-3 [&>svg]:size-4 [&>svg]:translate-y-0.5;
+  }
+
+  .alert-default {
+    @apply bg-card text-card-foreground;
+  }
+
+  .alert-destructive {
+    @apply border-destructive/50 bg-destructive/5 text-destructive [&>svg]:text-current;
+  }
+
+  /* Variants below are applied via `alert-{{ $variant }}` in the alert
+     shortcode, so they must exist as static classes here — Tailwind cannot see
+     a class name assembled from a template variable. */
+  .alert-info {
+    @apply border-info/40 bg-info/5 text-info;
+  }
+
+  .alert-warning {
+    @apply border-warning/40 bg-warning/5 text-warning;
+  }
+
+  .alert-success {
+    @apply border-success/40 bg-success/5 text-success;
+  }
+
+  /* ------------------------------------------------------------------ Misc */
+  .input {
+    @apply flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base
+      shadow-xs transition-[color,box-shadow] outline-none
+      placeholder:text-muted-foreground focus-visible:border-ring
+      focus-visible:ring-[3px] focus-visible:ring-ring/50
+      disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50
+      md:text-sm;
+  }
+
+  .divider {
+    @apply h-px w-full bg-border;
+  }
+
+  /* Body images sit on the page background, not on a grey plate. `bg-muted`
+     would show through the transparent areas of logo/screenshot PNGs and,
+     because it resolves to a variable, flip to a white lift in dark mode. */
+  .prose-shadcn {
+    @apply prose max-w-none dark:prose-invert
+      prose-headings:scroll-mt-24 prose-headings:font-semibold
+      prose-a:font-medium prose-a:underline prose-a:underline-offset-4
+      prose-code:before:content-none prose-code:after:content-none
+      prose-pre:rounded-lg prose-pre:border
+      prose-img:mx-auto prose-img:h-auto prose-img:max-w-full
+        prose-img:rounded-lg prose-img:border prose-img:bg-transparent;
+
+    /* Body copy in prose reads better at normal tracking and the variant's own
+       navy, not the typography plugin's default neutral gray. */
+    --tw-prose-body: var(--foreground);
+    --tw-prose-headings: var(--foreground);
+    --tw-prose-links: var(--primary);
+    --tw-prose-code: var(--foreground);
+    --tw-prose-pre-bg: var(--muted);
+    --tw-prose-pre-code: var(--foreground);
+    --tw-prose-quotes: var(--foreground);
+    --tw-prose-hr: var(--border);
+    --tw-prose-bold: var(--foreground);
+    letter-spacing: 0;
+  }
+
+  /* --------------------------------------------------------------- Tabs */
+  /* tab.html emits label+panel as siblings, so flex `order` groups all labels
+     into the first row and pushes each panel onto its own full-width row.
+     Only the selected panel is rendered (others are [hidden]), so exactly one
+     panel row is ever visible. */
+  .tabs {
+    @apply my-6 flex flex-wrap items-end;
+  }
+
+  .tab-label {
+    @apply order-1 flex items-center justify-center gap-1.5 whitespace-nowrap
+      bg-muted px-3 py-1.5 text-sm font-medium text-muted-foreground transition-all
+      focus-visible:z-10 focus-visible:ring-[3px] focus-visible:ring-ring/50
+      focus-visible:outline-none aria-selected:bg-background aria-selected:text-foreground
+      aria-selected:shadow-sm;
+  }
+
+  .tab-label:first-child {
+    @apply rounded-l-lg;
+  }
+
+  .tab-label:last-of-type {
+    @apply rounded-r-lg;
+  }
+
+  .tab-panel {
+    @apply order-2 mt-4 w-full basis-full text-sm leading-relaxed;
+  }
+
+  .tab-panel > :first-child {
+    @apply mt-0;
+  }
+
+  .tab-panel > :last-child {
+    @apply mb-0;
+  }
+
+  /* ----------------------------------------------------------- Accordion */
+  .accordion {
+    @apply w-full overflow-hidden rounded-lg border;
+  }
+
+  .accordion-item + .accordion-item {
+    @apply border-t;
+  }
+
+  .accordion-trigger {
+    @apply flex w-full items-center justify-between gap-4 px-4 py-4 text-left text-sm
+      font-medium transition-colors hover:bg-accent hover:text-accent-foreground
+      focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none;
+  }
+
+  .accordion-content {
+    @apply overflow-hidden px-4 pb-4 text-sm text-muted-foreground;
+  }
+
+  .accordion-item[open] .accordion-content {
+    animation: shadcn-accordion-down 0.2s ease-out;
+  }
+
+  .accordion-item:not([open]) .accordion-content {
+    animation: shadcn-accordion-up 0.2s ease-out;
+  }
+
+  /* Reveal-on-scroll helper driven by IntersectionObserver in main.js. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}

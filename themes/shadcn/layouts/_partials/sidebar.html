@@ -1,0 +1,89 @@
+{{- /* Right-hand sidebar for blog listings.
+
+  Mirrors the structure of a typical personal-weblog sidebar: author card,
+  recent posts, then the category and tag clouds with post counts.
+
+  Every block is optional — an empty taxonomy renders nothing, so this is safe
+  on a site that has not adopted categories or tags yet.
+*/ -}}
+{{- $mainSections := site.Params.mainSections | default (slice "posts") -}}
+{{- $posts := where site.RegularPages "Type" "in" $mainSections -}}
+{{- $heading := "text-xs font-semibold tracking-normal text-muted-foreground uppercase" -}}
+
+<aside class="flex flex-col gap-8 md:sticky md:top-24 md:self-start">
+  {{- /* -------------------------------------------------------- Author */}}
+  {{- with site.Params.author }}
+    <div class="card gap-3 p-5">
+      <div class="flex flex-col gap-1">
+        <p class="font-semibold">{{ . }}</p>
+        {{- with site.Params.authorBio }}
+          <p class="text-sm text-muted-foreground">{{ . }}</p>
+        {{- end }}
+      </div>
+      {{- with site.GetPage "/about" }}
+        <a href="{{ .RelPermalink }}" class="btn btn-outline btn-sm w-full">
+          {{ i18n "readMore" | default "Read more" }}
+        </a>
+      {{- end }}
+    </div>
+  {{- end }}
+
+  {{- /* --------------------------------------------------- Recent posts */}}
+  {{- with first 5 $posts }}
+    <section>
+      <h2 class="{{ $heading }} mb-3">Recent posts</h2>
+      <ul class="flex flex-col gap-2.5">
+        {{- range . }}
+          <li>
+            <a
+              href="{{ .RelPermalink }}"
+              class="text-sm leading-snug transition-colors hover:text-primary"
+            >
+              {{ .Title }}
+            </a>
+          </li>
+        {{- end }}
+      </ul>
+    </section>
+  {{- end }}
+
+  {{- /* ----------------------------------------------------- Categories */}}
+  {{- with site.Taxonomies.categories.ByCount }}
+    <section>
+      <h2 class="{{ $heading }} mb-3">Categories</h2>
+      <ul class="flex flex-col divide-y divide-border">
+        {{- range . }}
+          <li>
+            <a
+              href="{{ .Page.RelPermalink }}"
+              class="flex items-center justify-between gap-2 py-1.5 text-sm transition-colors hover:text-primary"
+            >
+              {{ .Page.Title }}
+              <span class="text-xs text-muted-foreground">{{ .Count }}</span>
+            </a>
+          </li>
+        {{- end }}
+      </ul>
+    </section>
+  {{- end }}
+
+  {{- /* ----------------------------------------------------------- Tags */}}
+  {{- with site.Taxonomies.tags.ByCount }}
+    <section>
+      <h2 class="{{ $heading }} mb-3">Tags</h2>
+      <ul class="flex flex-col divide-y divide-border">
+        {{- range first 20 . }}
+          <li>
+            <a
+              href="{{ .Page.RelPermalink }}"
+              class="flex items-center justify-between gap-2 py-1.5 text-sm transition-colors hover:text-primary"
+            >
+              <span class="truncate">{{ .Page.Title }}</span>
+              <span class="shrink-0 text-xs text-muted-foreground">{{ .Count }}</span>
+            </a>
+          </li>
+        {{- end }}
+      </ul>
+    </section>
+  {{- end }}
+</aside>

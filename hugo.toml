@@ -1,3 +1,151 @@
-baseURL = 'http://example.org/'
+baseURL = 'https://cloudbricks.dev/'
+# Not `locale` - that is not a Hugo config key, which left <html lang> empty
+# on every page. languageCode is what Hugo reads.
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+defaultContentLanguage = 'en'
+title = 'Cloudbricks.dev'
+theme = 'shadcn'
+
+enableRobotsTXT = true
+enableEmoji = true
+enableGitInfo = false
+summaryLength = 30
+
+[pagination]
+  pagerSize = 9
+
+[[menus.main]]
+  name = 'Posts'
+  pageRef = '/post'
+  weight = 10
+
+[[menus.main]]
+  name = 'Tags'
+  pageRef = '/tags'
+  weight = 20
+
+[[menus.main]]
+  name = 'About'
+  pageRef = '/about'
+  weight = 30
+
+[[menus.footer]]
+  name = 'About'
+  pageRef = '/about'
+  weight = 10
+
+[[menus.footer]]
+  name = 'Posts'
+  pageRef = '/post'
+  weight = 20
+
+[params]
+  description = 'Hands-on infrastructure and automation tutorials: VMware vSphere and ESXi, hypervisors, Kubernetes platforms, storage, CI/CD, and home lab build notes.'
+  tagline = 'Notes on virtualization, automation, and running infrastructure at home'
+  author = 'Kishore'
+  authorBio = 'Kishore Kumar Ramineni writes about infrastructure and automation: VMware, containers, storage, and the home lab behind it.'
+  dateFormat = 'January 2, 2006'
+  # Section name kept singular so migrated URLs stay /post/<category>/<slug>/.
+  # Its own aliases in content/post/_index.md cover /posts/, /blog/ etc.
+  mainSections = ['post']
+  postsTitle = 'From the blog'
+  defaultTheme = 'system'
+
+  # Design variant: 'shadcn' (default, upstream zinc tokens) or 'kish'
+ 
+  design = 'kish'
+  favicon = '/favicon.svg'
+  footerNote = 'Built with Hugo and a custom shadcn/ui theme. '
+
+  # Social preview image, used when a page has no cover of its own.
+  # Regenerate with `python tools/og-image.py`.
+  ogImage = 'images/og-default.png'
+
+  [params.social]
+    # Both header.html and footer.html loop over this map and skip falsy URLs,
+    # so an empty value hides the icon rather than linking to a bare domain.
+    # The key must match a case in _partials/icon.html or the header renders
+    # an empty anchor.
+    github = 'https://github.com/kkramineni'
+    youtube = 'https://www.youtube.com/@cloud_bricks'
+    x = ''
+    linkedin = ''
+
+  # Cookie consent. With enabled = true the theme declares Consent Mode v2
+  # signals as denied before gtag.js loads and shows a banner; declining
+  # leaves contextual non-personalised ads in place rather than blocking them.
+  [params.consent]
+    enabled = true
+
+  # AdSense is DISABLED. The previous value, ca-pub-9855783481482557, was an
+  # AdSense for YouTube ID whose account is deactivated and unlinked from its
+  # channel. A YouTube ID cannot serve website ads, so it only cost every
+  # visitor a ~200 KB script download for nothing.
+  #
+  # To turn ads on: apply for AdSense for content websites at
+  # adsense.google.com, then set client to the NEW ca-pub-... and put the same
+  # pub- number in static/ads.txt. Leave it empty and no ad script loads.
+  [params.adsense]
+    client = ''
+    # Ad slot for the {{< ad >}} shortcode. Empty means the shortcode renders
+    # nothing rather than emitting an ad unit with no slot. Auto-ads do not
+    # need this - only in-content placements do.
+    slot = ''
+
+  [params.analytics]
+    # Real GA4 property, kept as-is so analytics history is continuous.
+    measurementID = 'G-XZBH4JYYBW'
+
+  # Search, powered by Pagefind. The index is built by `pagefind --site public`
+  # AFTER hugo, so it needs the CI step in .github/workflows/hugo.yml. Setting
+  # this false removes the header link but leaves /search/ reachable.
+  [params.search]
+    enabled = true
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    noClasses = false
+    lineNos = false
+    tabWidth = 2
+    style = 'github-dark'
+
+[outputs]
+  home = ['html', 'rss']
+  section = ['html', 'rss']
+  taxonomy = ['html']
+  term = ['html', 'rss']
+
+[taxonomies]
+  tag = 'tags'
+  category = 'categories'
+  # Carried over from the migrated content: multi-part post series.
+  series = 'series'
+
+# Tailwind CSS v4 integration. buildStats emits hugo_stats.json so Tailwind can
+# discover the utility classes actually used in templates.
+[build]
+  [build.buildStats]
+    enable = true
+  [[build.cachebusters]]
+    source = 'assets/notwatching/hugo_stats\.json'
+    target = 'css'
+  [[build.cachebusters]]
+    source = '(postcss|tailwind)\.config\.js'
+    target = 'css'
+
+[module]
+  [[module.mounts]]
+    source = 'assets'
+    target = 'assets'
+  [[module.mounts]]
+    disableWatch = true
+    source = 'hugo_stats.json'
+    target = 'assets/notwatching/hugo_stats.json'
+
+# Required so Hugo Pipes may shell out to the Tailwind CSS CLI.
+[security]
+  [security.exec]
+    allow = ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^tailwindcss$']

@@ -1,0 +1,42 @@
+{{- /*
+  Alert — mirrors shadcn <Alert>. Also usable as {{< callout >}}.
+
+  {{< alert title="Heads up" variant="warning" >}}
+  Body text.
+  {{< /alert >}}
+
+  Params: title, variant (default|info|warning|destructive|success).
+*/ -}}
+{{- $variant := .Get "variant" | default "default" -}}
+{{- $title := .Get "title" -}}
+{{- $body := .Inner | strings.TrimSpace -}}
+
+{{- $icon := "" -}}
+{{- if eq $variant "warning" -}}
+  {{- $icon = "triangle-alert" -}}
+{{- else if eq $variant "destructive" -}}
+  {{- $icon = "triangle-alert" -}}
+{{- else if eq $variant "success" -}}
+  {{- $icon = "check" -}}
+{{- else if eq $variant "info" -}}
+  {{- $icon = "info" -}}
+{{- end -}}
+
+<div
+  class="alert {{ if eq $variant "default" }}alert-default{{ else }}alert-{{ $variant }}{{ end }} my-6"
+>
+  {{- with $icon }}
+    {{ partial "icon.html" (dict "name" .) }}
+  {{- end }}
+
+  <div class="col-start-2 grid gap-1">
+    {{- with $title }}
+      <div class="font-medium tracking-tight">{{ . }}</div>
+    {{- end }}
+    {{- with $body }}
+      <div class="text-sm leading-relaxed [&>p]:mt-0 [&>p:last-child]:mb-0">
+        {{ . | $.Page.RenderString (dict "display" "block") }}
+      </div>
+    {{- end }}
+  </div>
+</div>

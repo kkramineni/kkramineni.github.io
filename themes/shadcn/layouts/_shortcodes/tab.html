@@ -1,0 +1,19 @@
+{{- /*
+  One tab inside a tabs shortcode. Emits the label button and its panel as
+  siblings; the parent tabs shortcode's grid places them in the right rows.
+
+  {{< tab title="npm" >}} ... {{< /tab >}}
+*/ -}}
+{{- $title := .Get "title" | default "Tab" -}}
+<button
+  type="button"
+  role="tab"
+  data-tab-label
+  class="tab-label"
+>
+  {{- with .Get "icon" }}{{ partial "icon.html" (dict "name" .) }} {{ end -}}
+  {{ $title }}
+</button>
+<div data-tab-panel class="tab-panel">
+  {{- .Inner | strings.TrimSpace | $.Page.RenderString (dict "display" "block") -}}
+</div>

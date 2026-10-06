@@ -1,0 +1,14 @@
+{{- /* Deterministic per-tag colour (oklch literal).
+
+  MD5 the tag name, take the first hex char, bucket to a palette slot. Same
+  string → same colour on every build, no config needed. Returns the value for
+  an inline style="--tag-accent: …" on the chip.
+*/ -}}
+{{- $palette := slice
+  "oklch(55% 0.15 252)"   "oklch(55% 0.15 200)"
+  "oklch(55% 0.15 165)"   "oklch(55% 0.15 145)"
+  "oklch(55% 0.15 105)"   "oklch(55% 0.15 65)"
+  "oklch(55% 0.15 25)"    "oklch(52% 0.14 340)" -}}
+{{- $pos := index (dict "0" 0 "1" 1 "2" 2 "3" 3 "4" 4 "5" 5 "6" 6 "7" 7 "8" 8 "9" 9
+   "a" 10 "b" 11 "c" 12 "d" 13 "e" 14 "f" 15) (substr (md5 .) 0 1) -}}
+{{- index $palette (mod $pos 8) -}}

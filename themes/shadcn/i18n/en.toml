@@ -1,0 +1,17 @@
+[skipToContent]
+other = "Skip to content"
+
+[readMore]
+other = "Read more"
+
+[backToList]
+other = "Back to list"
+
+[postsCount]
+other = "posts"
+
+[noPosts]
+other = "Nothing published here yet."
+
+[publishedOn]
+other = "Published on"

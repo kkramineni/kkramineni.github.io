@@ -16,7 +16,6 @@ thumbnail = "/images/harvester_logo.svg"
 series = "Private Cloud"
 +++
 
-![img placeholder](/images/harvester_logo.svg " ")
 ##### Harvester
 Harvester is a modern Hyperconverged infrastructure (HCI) solution built for bare metal servers using enterprise-grade open source technologies including Kubernetes, KubeVirt and Longhorn.
 

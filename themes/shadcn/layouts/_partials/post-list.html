@@ -1,0 +1,30 @@
+{{- /* Post listing: paginated card grid plus an empty state.
+
+  Expects: dict "pages" <page collection> "page" <page context>.
+  Owns the Paginate call so every listing (home, section, term) paginates
+  identically and pagination.html can keep reading .Paginator off the page.
+
+  Column counts are container queries, not viewport breakpoints: these grids sit
+  inside a column that shrinks when the sidebar appears, so the viewport width
+  says nothing useful about how many cards actually fit.
+*/ -}}
+{{- $pages := .pages -}}
+{{- $page := .page -}}
+{{- $paginator := $page.Paginate $pages -}}
+
+<div class="mt-10">
+  {{- if $paginator.Pages }}
+    <div class="grid gap-6 @lg:grid-cols-2 @4xl:grid-cols-3">
+      {{- range $paginator.Pages }}
+        {{ partial "post-card.html" . }}
+      {{- end }}
+    </div>
+    {{ partial "pagination.html" $page }}
+  {{- else }}
+    <div class="card items-center gap-2 p-12 text-center">
+      <p class="text-muted-foreground">
+        {{ i18n "noPosts" | default "Nothing published here yet." }}
+      </p>
+    </div>
+  {{- end }}
+</div>

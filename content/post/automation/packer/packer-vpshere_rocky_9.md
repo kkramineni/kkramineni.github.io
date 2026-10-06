@@ -2,7 +2,7 @@
 author = "Kishore"
 title = "How to Create Rocky Linux Template in vSphere - using Packer"
 date = "2023-11-25"
-description = ""
+description = "Automating a Rocky Linux 9 template for vSphere with Packer and the vSphere plugin, driven by a kickstart file."
 tags = [
     "IaC",
     "Automation",
@@ -15,24 +15,19 @@ thumbnail = "/images/packer_vsphere.png"
 series = "packer"
 +++
 
-#### Overview
+## Overview
 
-Packer uses the HashiCorp Configuration Language - HCL - designed to allow concise descriptions of the required steps to get to a build file. This page describes the features of HCL2 exhaustively
+Packer uses the HashiCorp Configuration Language (HCL), which allows concise descriptions of the steps required to produce a build. See the [HCL templates reference](https://developer.hashicorp.com/packer/docs/templates/hcl_templates).
 
-<a href="https://developer.hashicorp.com/packer/docs/templates/hcl_templates"> HCL Templates reference</a>
+This is the file structure I've used:
 
-File structure i have used:
+![The Packer file structure](/images/packer/packer_folder.png)
 
-![img placeholder](/images/packer/packer_folder.png " ")
+The two files below are shared by every template in the series, and are called by the Packer tool itself:
 
----
+![The shared vSphere files](/images/packer/common_vsphere.png)
 
-Below two files are commonly used by all the templates. which will be called using packer tool
-
-![img placeholder](/images/packer/common_vsphere.png " ")
-
-
- ###### 1. common.pkrvars.hcl
+### 1. common.pkrvars.hcl
 
 ```
 // Virtual Machine Settings
@@ -62,7 +57,7 @@ common_shutdown_timeout  = "15m"
 ```
 
 
-###### 2. vsphere.pkrvars.hcl
+### 2. vsphere.pkrvars.hcl
 
 ```
 // vSphere Credentials - replace with your configuration
@@ -89,7 +84,7 @@ Below files are used for Rocky Linux 9 template
 
 ---
 
-###### 1. variables.pkr.hcl
+### 1. variables.pkr.hcl
 
 Contains all input variables to which you assign values. Any explicit values in this file will override the declared default values (these are found in the following file). The auto extension enables Packer to use this file automatically. It does not require you to reference or pass it in the command line explicitly
 
@@ -439,7 +434,7 @@ variable "communicator_timeout" {
 
 ```
 
-###### 2. linux-rocky.pkr.hcl
+### 2. linux-rocky.pkr.hcl
 
 This file contains the blocks as mentioned in the refernece, from declared variables, build and source blocks. Packer uses this to automate the VM template creation.
 
@@ -578,7 +573,7 @@ build {
 
 ```
 
-###### 3. linux-rocky.auto.pkrvars.hcl
+### 3. linux-rocky.auto.pkrvars.hcl
 
 Once a variable is declared in the configuration, we can set it as individual or using *.auto.pkrvars.hcl
 
@@ -633,7 +628,7 @@ communicator_timeout = "30m"
 
 
 
-###### 4. ks.pkrtpl.hcl under data folder
+### 4. ks.pkrtpl.hcl under data folder
 
 All Packer can do without a kickstart file is provision the virtual machine and destroy it in vCenter (the build will time out as it has no connectivity to the VM itself). The kickstart automates the installation of the operating system, in this case, Rocky Linux.
 
@@ -716,7 +711,7 @@ it took, approximately 13 minutes for me to complete the template creation
 
 
 
-### Watch the video on How to:
+### Watch the video
 
 {{< youtube lcbUSPeDNSI >}}
 

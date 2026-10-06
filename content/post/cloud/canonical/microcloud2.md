@@ -17,7 +17,6 @@ thumbnail = "/images/microcloud.png"
 series = "Private Cloud"
 +++
 
-![img placeholder](/images/microcloud.png " ")
 ##### MicroCloud
 In my previsous post, we have deployed the Microcloud using manual setup. This post shows how to setup the Microcloud using OpenTofu/Terraform.
 

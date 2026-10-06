@@ -1,0 +1,115 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+{{- with .Params.robots }}
+<meta name="robots" content="{{ . }}" />
+{{- end }}
+
+<title>{{ block "title" . }}{{ if .IsHome }}{{ site.Title }}{{ else }}{{ with .Title }}{{ . }} | {{ end }}{{ site.Title }}{{ end }}{{ end }}</title>
+
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}" />
+{{- /* A paginated list renders through its parent template, so `.Permalink`
+     still points at page 1 - which made /post/page/2/ self-canonicalise to
+     /post/ and told Google to drop it. Self-canonicalise each page instead.
+     Set `consolidatePagination = true` in hugo.toml to fold pages 2+ back
+     into page 1 deliberately. */ -}}
+{{- $canonical := .Permalink -}}
+{{- if and .IsNode (not site.Params.consolidatePagination) -}}
+  {{- with .Paginator -}}
+    {{- if gt .PageNumber 1 -}}
+      {{- $canonical = .URL -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<link rel="canonical" href="{{ $canonical }}" />
+
+{{ partial "head/meta.html" . }}
+
+{{/* Applied before paint to avoid a light/dark flash. */}}
+{{ $theme := site.Params.defaultTheme | default "system" }}
+<script>
+  (function () {
+    try {
+      var s = localStorage.getItem("theme");
+      var d = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var dark = s === "dark" || ((s === "system" || !s) && d);
+      document.documentElement.classList.toggle("dark", dark);
+    } catch (e) {}
+  })();
+</script>
+<script>
+  window.__shadcnTheme__ = {{ $theme }};
+</script>
+
+{{ with .OutputFormats.Get "rss" }}
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }}" />
+{{ end }}
+
+{{/* Analytics + AdSense, both opt-in via site.Params so the theme works
+     without them. Remove the matching [params.*] block in hugo.toml and the
+     tag disappears.
+
+     ORDER MATTERS: the Consent Mode default below has to run before gtag.js
+     is requested, otherwise the signals miss the first load. Ads are not
+     blocked outright - AdSense reads these signals and serves contextual
+     "limited ads" while ad_storage is denied, so rejecting still earns
+     without personalising anything. */}}
+{{ $consent := site.Params.consent | default dict }}
+{{ if not $consent.enabled }}
+  {{/* Consent UI switched off: still declare the storage signals so GA4 and
+     AdSense behave predictably, but nothing prompts the visitor. */}}
+  {{ if or site.Params.analytics site.Params.adsense }}
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { dataLayer.push(arguments); };
+      gtag("consent", "default", {
+        ad_storage: "denied", ad_user_data: "denied",
+        ad_personalization: "denied", analytics_storage: "denied",
+        functionality_storage: "granted", security_storage: "granted"
+      });
+    </script>
+  {{ end }}
+{{ else }}
+  <script>
+    (function () {
+      var granted = {
+        ad_storage: "granted", ad_user_data: "granted",
+        ad_personalization: "granted", analytics_storage: "granted"
+      };
+      var denied = {
+        ad_storage: "denied", ad_user_data: "denied",
+        ad_personalization: "denied", analytics_storage: "denied"
+      };
+      var stored = null;
+      try { stored = window.localStorage.getItem("shadcn-consent"); } catch (e) {}
+      if (stored !== "granted" && stored !== "denied") { stored = null; }
+
+      window.__shadcnConsent__ = { state: stored, signals: stored === "granted" ? granted : denied };
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { dataLayer.push(arguments); };
+      gtag("consent", "default", Object.assign({
+        functionality_storage: "granted", security_storage: "granted"
+      }, window.__shadcnConsent__.signals));
+
+      if (stored) { gtag("consent", "update", window.__shadcnConsent__.signals); }
+    })();
+  </script>
+{{ end }}
+{{ with site.Params.analytics }}
+  {{ with .measurementID }}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+    <script>
+      gtag("js", new Date());
+      gtag("config", {{ . }});
+    </script>
+  {{ end }}
+{{ end }}
+{{ with site.Params.adsense }}
+  {{ with .client }}
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ . }}"
+      crossorigin="anonymous"
+    ></script>
+  {{ end }}
+{{ end }}

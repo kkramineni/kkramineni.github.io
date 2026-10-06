@@ -16,7 +16,6 @@ thumbnail = "/images/microcloud.png"
 series = "Private Cloud"
 +++
 
-![img placeholder](/images/microcloud.png " ")
 ##### MicroCloud
 MicroCloud allows you to deploy your own fully functional cloud in minutes.
 

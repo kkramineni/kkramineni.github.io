@@ -1,0 +1,19 @@
+{{- /* Site logo. Both variants shipped so the mark stays legible in light and
+     dark themes — the active one is toggled with Tailwind's `dark:` variant.
+*/ -}}
+<img
+  src="{{ "/logos/logo_black.png" | relURL }}"
+  alt="{{ site.Title }} logo"
+  class="h-12 w-auto dark:hidden"
+  width="1021"
+  height="219"
+  decoding="async"
+/>
+<img
+  src="{{ "/logos/logo_white.png" | relURL }}"
+  alt="{{ site.Title }} logo"
+  class="hidden h-12 w-auto dark:block"
+  width="1021"
+  height="219"
+  decoding="async"
+/>

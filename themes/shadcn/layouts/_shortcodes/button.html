@@ -1,0 +1,29 @@
+{{- /*
+  Button — mirrors shadcn <Button>.
+
+  {{< button text="Get started" url="/signup" variant="default" size="lg" >}}
+
+  Params: text (or inner content), url|href, icon, variant
+          (default|destructive|outline|secondary|ghost|link),
+          size (sm|md|lg|icon), class (extra classes), newtab.
+*/ -}}
+{{- $label := .Get "text" -}}
+{{- if not $label -}}
+  {{- with .Inner -}}
+    {{- $label = . | strings.TrimSpace -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $variant := .Get "variant" | default "default" -}}
+{{- $size := .Get "size" | default "md" -}}
+{{- $url := .Get "url" | default (.Get "href") | default "#" -}}
+{{- $class := .Get "class" | default (.Get "style") | default "" -}}
+{{- $target := "" -}}
+{{- if .Get "newtab" -}}
+  {{- $target = ` target="_blank" rel="noopener"` -}}
+{{- end -}}
+
+<a href="{{ $url | relURL }}" class="btn btn-{{ $variant }} btn-{{ $size }} {{ $class }}"{{ $target | safeHTML }}>
+  {{- with .Get "icon" -}}{{ partial "icon.html" (dict "name" .) }}{{- end -}}
+  {{ $label | safeHTML }}
+</a>
