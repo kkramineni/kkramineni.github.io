@@ -4,6 +4,49 @@
  * component (variants and all) and is driven purely by the tokens in shadcn.css.
  */
 
+/* Type scale raised one level, fonts only. Each token is remapped onto the
+ * NEXT Tailwind v4 default step, e.g. text-sm goes 0.875rem -> 1rem so body
+ * copy reads at 16px and the rest of the scale follows. Line-heights come
+ * along so rhythm is preserved. This file is imported by both design variants
+ * (kish.css and shadcn.css), so the whole site steps up together. Spacing is
+ * untouched: these tokens do not feed the spacing/size utilities.
+ *
+ * Shared here rather than per-variant on purpose — see head/css.html. */
+@theme {
+  --text-2xs: 0.75rem;
+  --text-2xs--line-height: 1rem;
+
+  --text-xs: 0.875rem;
+  --text-xs--line-height: 1.25rem;
+
+  --text-sm: 1rem;
+  --text-sm--line-height: 1.5rem;
+
+  --text-base: 1.125rem;
+  --text-base--line-height: 1.75rem;
+
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.75rem;
+
+  --text-xl: 1.5rem;
+  --text-xl--line-height: 2rem;
+
+  --text-2xl: 1.875rem;
+  --text-2xl--line-height: 2.25rem;
+
+  --text-3xl: 2.25rem;
+  --text-3xl--line-height: 2.5rem;
+
+  --text-4xl: 3rem;
+  --text-4xl--line-height: 1;
+
+  --text-5xl: 3.75rem;
+  --text-5xl--line-height: 1;
+
+  --text-6xl: 4.5rem;
+  --text-6xl--line-height: 1;
+}
+
 @layer components {
   /* ---------------------------------------------------------------- Button */
   .btn {
@@ -163,7 +206,10 @@
      would show through the transparent areas of logo/screenshot PNGs and,
      because it resolves to a variable, flip to a white lift in dark mode. */
   .prose-shadcn {
-    @apply prose max-w-none dark:prose-invert
+    /* prose-lg steps the article body from 16px to 18px, matching the +1 type
+       scale above. All prose children are em-based, so headings, code, tables
+       and blockquote spacing scale with the container. */
+    @apply prose prose-lg max-w-none dark:prose-invert
       prose-headings:scroll-mt-24 prose-headings:font-semibold
       prose-a:font-medium prose-a:underline prose-a:underline-offset-4
       prose-code:before:content-none prose-code:after:content-none
