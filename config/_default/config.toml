@@ -4,9 +4,7 @@ baseurl = "https://cloudbricks.dev/"  # Include trailing slash
 # title = "Clarity"  # Edit directly from config/_default/languages.toml # alternatively, uncomment this and remove `title` entry from the aforemention file.
 copyright = "Copyright ©; all rights reserved."
 canonifyurls = true
-paginate = 10
 theme = "hugo-clarity"
-disqusShortname = ""
 
 DefaultContentLanguage = "en"
 # [languages]
@@ -22,3 +20,6 @@ series = "series"
 
 [outputs]
 home = ["HTML", "RSS", "JSON"]
+
+[pagination]
+  pagerSize = 10
