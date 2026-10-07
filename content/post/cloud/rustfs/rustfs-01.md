@@ -6,7 +6,7 @@ description = "Install and configure RustFS as an S3-compatible object store on 
 tags = ["Cloud", "Linux", "Ubuntu", "Object Storage", "S3", "RustFS", "Storage"]
 categories = "Cloud"
 thumbnail = "/images/rustfs.png"
-draft = true
+draft = false
 +++
 
 ## What You'll Accomplish
