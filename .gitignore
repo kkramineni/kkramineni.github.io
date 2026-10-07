@@ -14,6 +14,7 @@
 # package-lock.json must be COMMITTED: CI runs `npm ci`, which is a no-op
 # without it, leaving @tailwindcss/cli uninstalled and failing the build.
 
+/.opencode/
 # Editors / OS
 .DS_Store
 Thumbs.db
