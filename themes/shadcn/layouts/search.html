@@ -18,8 +18,8 @@
     </header>
 
     <div class="mt-8">
-      {{/* This placeholder is replaced the moment pagefind-ui.js initialises.
-           If the bundle is missing - which is the normal state under
+      {{/* This placeholder is replaced the moment the PagefindUI mount below
+           runs. If the bundle is missing - which is the normal state under
            `hugo server`, and would also happen in CI if the pagefind step ever
            failed - the placeholder stays and explains itself, instead of the
            page rendering as a bare heading. */}}
@@ -45,6 +45,23 @@
   </div>
 
   <script src="{{ "/pagefind/pagefind-ui.js" | relLangURL }}"></script>
+  {{- /* pagefind-ui.js only DEFINES window.PagefindUI — it never auto-runs, so
+         the UI has to be mounted explicitly or the placeholder above stays
+         forever reading "Loading the search index…" (which is exactly what
+         happened: the bundle loaded fine in production and nothing initialised).
+
+         Guarded so a missing bundle — the normal state under `hugo server`, or
+         a failed CI pagefind step — leaves the self-explanatory placeholder
+         instead of throwing a ReferenceError. */ -}}
+  <script>
+    (function () {
+      if (typeof window.PagefindUI !== "function") return;
+      var el = document.getElementById("pagefind");
+      if (!el) return;
+      el.textContent = "";
+      new window.PagefindUI({ element: el });
+    })();
+  </script>
   {{- /* Pagefind's own stylesheet, tinted to the active design variant. The
          variables it reads are the same ones the theme exposes. */ -}}
   <link rel="stylesheet" href="{{ "/pagefind/pagefind-ui.css" | relLangURL }}" />

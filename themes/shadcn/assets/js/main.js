@@ -36,19 +36,30 @@
       /* ignore */
     }
 
-    var mode = stored || window.__shadcnTheme__ || "system";
-    apply(mode, false);
+    // Live mode state: tracked in a variable so it still advances when
+    // localStorage is blocked (private mode), where every read returns null.
+    var currentMode = stored || window.__shadcnTheme__ || "system";
+    apply(currentMode, false);
 
     var button = document.getElementById("theme-toggle");
     if (button) {
+      button.setAttribute("data-mode", currentMode);
       button.addEventListener("click", function () {
-        var current = "system";
-        try {
-          current = localStorage.getItem(STORAGE_KEY) || mode;
-        } catch (e) {
-          /* ignore */
+        var wasDark = resolve(currentMode);
+        var index = MODES.indexOf(currentMode);
+        if (index < 0) index = MODES.length - 1;
+
+        // Cycle light -> dark -> system, skipping any mode that resolves to
+        // the appearance already on screen. Without this, starting from
+        // "system" on a light OS wasted the first click on an explicit
+        // "light" that looked identical — so light -> dark needed two clicks.
+        var next = currentMode;
+        for (var i = 1; i <= MODES.length; i++) {
+          next = MODES[(index + i) % MODES.length];
+          if (resolve(next) !== wasDark) break;
         }
-        var next = MODES[(MODES.indexOf(current) + 1) % MODES.length];
+
+        currentMode = next;
         apply(next, true);
         button.setAttribute("data-mode", next);
       });
@@ -58,13 +69,7 @@
     if (window.matchMedia) {
       var mq = window.matchMedia("(prefers-color-scheme: dark)");
       var onChange = function () {
-        var active = null;
-        try {
-          active = localStorage.getItem(STORAGE_KEY);
-        } catch (e) {
-          /* ignore */
-        }
-        if (!active || active === "system") apply("system", false);
+        if (!currentMode || currentMode === "system") apply("system", false);
       };
       if (mq.addEventListener) mq.addEventListener("change", onChange);
       else if (mq.addListener) mq.addListener(onChange);

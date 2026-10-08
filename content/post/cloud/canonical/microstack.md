@@ -1,6 +1,6 @@
 +++
 author = "Kishore"
-title = "How to setup microstck openstack"
+title = "How to setup microstack openstack"
 date = "2023-12-28"
 description = ""
 tags = [
