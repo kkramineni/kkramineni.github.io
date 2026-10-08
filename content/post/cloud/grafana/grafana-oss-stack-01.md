@@ -5,6 +5,7 @@ date = "2026-10-07"
 description = "Deploy Prometheus, Loki, Tempo and Grafana with Docker Compose, instrument a demo app to emit metrics, logs and traces, and correlate all three signals from a single dashboard."
 tags = ["Cloud", "Linux", "Monitoring", "Prometheus", "Grafana", "Containers"]
 categories = "Cloud"
+thumbnail = "/images/grafana.png"
 draft = false
 +++
 
