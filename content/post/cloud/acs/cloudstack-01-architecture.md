@@ -1,13 +1,13 @@
 +++
 author = "Kishore"
 title = "Apache CloudStack — Architecture & Core Concepts"
-date = "2026-10-11"
+date = "2026-10-15"
 description = "Part 1 of the Apache CloudStack series: components, the zone/pod/cluster/host hierarchy, system VMs, and the object model."
 tags = ["Cloud", "Apache CloudStack", "IaaS", "Architecture", "Series"]
 categories = "Cloud"
 series = "Apache CloudStack"
 thumbnail = "/images/acs.png"
-draft = true
+draft = false
 +++
 
 ## What You'll Learn

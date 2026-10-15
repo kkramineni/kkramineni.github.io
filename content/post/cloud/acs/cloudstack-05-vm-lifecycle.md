@@ -1,13 +1,13 @@
 +++
 author = "Kishore"
 title = "Apache CloudStack — Virtual Machine Lifecycle"
-date = "2026-10-15"
+date = "2026-10-19"
 description = "Part 5 of the Apache CloudStack series: allocation strategies, deployment, management, and instance snapshots."
 tags = ["Cloud", "Apache CloudStack", "IaaS", "Virtual Machines", "Series"]
 categories = "Cloud"
 series = "Apache CloudStack"
 thumbnail = "/images/acs.png"
-draft = false
+draft = true
 +++
 
 ## Coming Soon

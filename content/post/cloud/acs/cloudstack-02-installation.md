@@ -1,13 +1,13 @@
 +++
 author = "Kishore"
 title = "Apache CloudStack — Installation & First Deployment"
-date = "2026-10-12"
+date = "2026-10-16"
 description = "Part 2 of the Apache CloudStack series: management server setup, hypervisor preparation, and bringing up a working zone."
 tags = ["Cloud", "Apache CloudStack", "IaaS", "Installation", "Series"]
 categories = "Cloud"
 series = "Apache CloudStack"
 thumbnail = "/images/acs.png"
-draft = false
+draft = true
 +++
 
 ## Coming Soon

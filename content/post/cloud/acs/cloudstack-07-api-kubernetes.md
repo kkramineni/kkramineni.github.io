@@ -1,13 +1,13 @@
 +++
 author = "Kishore"
 title = "Apache CloudStack — API, CloudMonkey & Kubernetes"
-date = "2026-10-15T00:10:00"
+date = "2026-10-20"
 description = "Part 7 of the Apache CloudStack series: REST API, CloudMonkey CLI, automation patterns, and the CloudStack Kubernetes Service."
 tags = ["Cloud", "Apache CloudStack", "IaaS", "API", "Kubernetes", "Series"]
 categories = "Cloud"
 series = "Apache CloudStack"
 thumbnail = "/images/acs.png"
-draft = false
+draft = true
 +++
 
 ## Coming Soon

@@ -1,13 +1,13 @@
 +++
 author = "Kishore"
 title = "Apache CloudStack — Storage"
-date = "2026-10-14"
+date = "2026-10-18"
 description = "Part 4 of the Apache CloudStack series: primary and secondary storage, volumes, templates, snapshots, and object storage."
 tags = ["Cloud", "Apache CloudStack", "IaaS", "Storage", "Series"]
 categories = "Cloud"
 series = "Apache CloudStack"
 thumbnail = "/images/acs.png"
-draft = false
+draft = true
 +++
 
 ## Coming Soon
