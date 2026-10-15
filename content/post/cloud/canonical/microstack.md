@@ -2,7 +2,7 @@
 author = "Kishore"
 title = "How to setup microstack openstack"
 date = "2023-12-28"
-description = ""
+description = "Set up an OpenStack cloud on Ubuntu using MicroStack, which brings up a ready-to-use private cloud with Nova, Glance, Cinder, Neutron, and Horizon on a single host."
 tags = [
     "Cloud",
     "Openstack",

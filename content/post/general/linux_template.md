@@ -2,7 +2,7 @@
 author = "Kishore"
 title = "How to Create a Rocky Linux Server Template in VMware - Manual"
 date = "2023-09-23"
-description = ""
+description = "Create a reusable Rocky Linux server template in VMware Workstation manually, choosing the right virtual hardware, installing and updating the OS, and preparing it for general use."
 tags = [
     "VMware",
     "Linux",

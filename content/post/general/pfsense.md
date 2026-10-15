@@ -2,7 +2,7 @@
 author = "Kishore"
 title = "pfSense Firewall install and basic config"
 date = "2023-09-24"
-description = ""
+description = "Install pfSense on virtual hardware and walk through the basic initial configuration: interfaces, WAN/DHCP, firewall rules, DNS, and outbound NAT."
 tags = [
     "VMware",
     "Home Lab",

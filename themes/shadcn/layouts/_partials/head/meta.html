@@ -34,12 +34,11 @@
   {{ end }}
 {{ end }}
 
-{{ with partial "func/cover-image.html" . }}
-  <meta property="og:image" content="{{ . }}" />
-  <meta name="twitter:image" content="{{ . }}" />
-{{ end }}
-
-<meta name="twitter:card" content="{{ if partial "func/cover-image.html" . }}summary_large_image{{ else }}summary{{ end }}" />
+{{/* The og:image / twitter:image / twitter:card block above already resolves
+     the no-cover case (it falls back to params.ogImage), so this block used to
+     re-emit og:image, twitter:image and twitter:card — giving every post with a
+     thumbnail two og:image and two twitter:card tags. Only the title and
+     description remain, which have no other source in this file. */}}
 <meta name="twitter:title" content="{{ .Title | default site.Title }}" />
 <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}" />
 

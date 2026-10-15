@@ -1,0 +1,108 @@
+{{- /*
+  JSON-LD structured data.
+
+  Two graph entries are emitted rather than one so they reference each other by
+  @id instead of repeating the URL:
+
+    #website  the site itself, incl. SearchAction for the /search/ page
+    #article  only on regular pages (posts), as TechArticle
+
+  TechArticle is the schema.org type for a how-to/technical write-up, which is
+  what every post here is. Including it makes the article eligible for richer
+  results; the BreadcrumbList gives search engines the category trail.
+
+  Everything is serialised with jsonify (not safeJS) so quotes and angle
+  brackets in titles cannot break out of the script element.
+*/ -}}
+{{- $site := site -}}
+{{- $website := dict
+  "@type" "WebSite"
+  "@id" (printf "%s#website" site.BaseURL)
+  "url" site.BaseURL
+  "name" site.Title
+  "description" site.Params.description
+  "inLanguage" site.Language.Lang
+-}}
+{{- with site.Params.author -}}
+  {{- $website = merge $website (dict "author" (dict "@type" "Person" "name" .)) -}}
+{{- end -}}
+{{- with site.GetPage "/search" -}}
+  {{- $website = merge $website (dict "potentialAction" (dict
+    "@type" "SearchAction"
+    "target" (dict "@type" "EntryPoint" "urlTemplate" (printf "%ssearch/?q={search_term_string}" site.BaseURL))
+    "query-input" "required name=search_term_string"
+  )) -}}
+{{- end -}}
+
+{{- $graph := slice $website -}}
+
+{{- if .IsPage -}}
+  {{- $author := .Params.author | default site.Params.author -}}
+  {{- $article := dict
+    "@type" "TechArticle"
+    "@id" (printf "%s#article" .Permalink)
+    "headline" (.Title | plainify)
+    "name" (.Title | plainify)
+    "url" .Permalink
+    "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+    "inLanguage" site.Language.Lang
+    "isAccessibleForFree" true
+    "publisher" (dict "@id" (printf "%s#website" site.BaseURL))
+  -}}
+  {{- with .Description -}}
+    {{- $article = merge $article (dict "description" (. | plainify)) -}}
+  {{- end -}}
+  {{- with .Date -}}
+    {{- $article = merge $article (dict "datePublished" (.Format "2006-01-02T15:04:05Z07:00")) -}}
+  {{- end -}}
+  {{- if gt .Lastmod .Date -}}
+    {{- $article = merge $article (dict "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")) -}}
+  {{- end -}}
+  {{- with $author -}}
+    {{- $article = merge $article (dict "author" (dict "@type" "Person" "name" .)) -}}
+  {{- end -}}
+  {{- /* Only emit an image when the page really has one. A wrong or missing
+         image is worse than none — Google flags mismatched structured data. */ -}}
+  {{- with partial "func/cover-image.html" . -}}
+    {{- $article = merge $article (dict "image" (. | absURL)) -}}
+  {{- end -}}
+  {{- /* categories is a string when set as `categories = "Cloud"`, not a slice.
+         delimit on a non-slice iterates runes and emits their code points —
+         which is how "Cloud" became "67, 108, 111, 117, 100". Always wrap in
+         a slice first. */ -}}
+  {{- with .Params.categories -}}
+    {{- $article = merge $article (dict "articleSection" (delimit (slice .) ", ")) -}}
+  {{- end -}}
+  {{- with .Params.tags -}}
+    {{- $article = merge $article (dict "keywords" (delimit . ", ")) -}}
+  {{- end -}}
+  {{- $graph = $graph | append $article -}}
+  {{- /* Breadcrumbs from the page's ancestor chain. Exported so the list
+         actually resolves instead of being silently dropped. */ -}}
+  {{- $crumbs := slice -}}
+  {{- range .Ancestors.Reverse -}}
+    {{- if not .IsHome -}}
+      {{- $crumbs = $crumbs | append (dict
+        "@type" "ListItem"
+        "position" (add (len $crumbs) 1)
+        "name" (.Title | default .LinkTitle)
+        "item" .Permalink
+      ) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $crumbs = $crumbs | append (dict
+    "@type" "ListItem"
+    "position" (add (len $crumbs) 1)
+    "name" (.Title | plainify)
+    "item" .Permalink
+  ) -}}
+  {{- $graph = $graph | append (dict
+    "@type" "BreadcrumbList"
+    "@id" (printf "%s#breadcrumb" .Permalink)
+    "itemListElement" $crumbs
+  ) -}}
+{{- end -}}
+
+<script type="application/ld+json">
+{{- dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS -}}
+</script>

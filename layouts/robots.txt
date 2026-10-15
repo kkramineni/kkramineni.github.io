@@ -1,0 +1,10 @@
+{{- /* Replaces Hugo's built-in robots.txt, which emits only "User-agent: *"
+       and never points crawlers at the sitemap. Hugo serves this at /robots.txt
+       because enableRobotsTXT = true in hugo.toml.
+
+       The sitemap URL is built with absURL so it inherits baseURL and stays
+       correct on the preview and production deploys. */ -}}
+User-agent: *
+Allow: /
+
+Sitemap: {{ "sitemap.xml" | absURL }}

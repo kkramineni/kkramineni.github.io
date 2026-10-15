@@ -2,7 +2,7 @@
 author = "Kishore"
 title = "Installation of Kubernetes and KubeSphere on Linux"
 date = "2024-01-01"
-description = ""
+description = "Install Kubernetes and KubeSphere on Linux, deploying the CNCF-certified container platform online or air-gapped and managing cloud-native workloads from the web console."
 tags = [
     "Cloud",
     "Containers",

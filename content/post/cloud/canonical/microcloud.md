@@ -2,7 +2,7 @@
 author = "Kishore"
 title = "How to setup Canonical MicroCloud"
 date = "2023-12-02"
-description = ""
+description = "Deploy Canonical MicroCloud on Ubuntu, letting a single snap command auto-configure LXD, Ceph, and OVN across a cluster of servers discovered over mDNS."
 tags = [
     "Cloud",
     "Openstack",

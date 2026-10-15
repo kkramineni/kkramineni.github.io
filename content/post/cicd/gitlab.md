@@ -2,7 +2,7 @@
 author = "Kishore"
 title = "How to Install and Configure  GitLab Community Edition"
 date = "2024-01-06"
-description = ""
+description = "Install and configure GitLab Community Edition on Linux, covering the initial setup, the required configuration changes, and how to get a project running through its CI/CD pipeline."
 tags = [
     "Cloud",
     "code-hosting-pipeline-engine",

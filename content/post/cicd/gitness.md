@@ -2,7 +2,7 @@
 author = "Kishore"
 title = "Getting sterted with Gitness"
 date = "2024-01-01"
-description = ""
+description = "Get started with Gitness, the self-hosted Git hosting platform: preparing a Linux host, running the container with its SQLite database, and creating a repository to push to."
 tags = [
     "Cloud",
     "code-hosting-pipeline-engine",

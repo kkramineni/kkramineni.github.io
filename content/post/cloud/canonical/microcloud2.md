@@ -2,7 +2,7 @@
 author = "Kishore"
 title = "How to setup Canonical MicroCloud in VMware vSphere using OpenTofu"
 date = "2023-12-24"
-description = ""
+description = "Deploy Canonical MicroCloud in VMware vSphere using OpenTofu, automating the same cluster that was built by hand in the previous post, with the code hosted on GitHub."
 tags = [
     "Cloud",
     "Openstack",

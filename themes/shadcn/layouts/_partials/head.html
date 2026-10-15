@@ -25,6 +25,11 @@
 
 {{ partial "head/meta.html" . }}
 
+{{/* JSON-LD structured data. Overridden by the project at
+     layouts/_partials/structured-data.html; falls back to the theme's
+     built-in so the theme still works on its own. */}}
+{{ partial "structured-data.html" . }}
+
 {{/* Applied before paint to avoid a light/dark flash. */}}
 {{ $theme := site.Params.defaultTheme | default "system" }}
 <script>

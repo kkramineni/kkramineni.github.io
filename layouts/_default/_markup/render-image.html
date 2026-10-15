@@ -1,0 +1,58 @@
+{{- /*
+  Image render hook.
+
+  Before this existed, every screenshot in a post body rendered as a bare
+  <img> with no loading hint and no intrinsic size. The theme's logo images
+  carry width/height, but content images did not, so each one shifted the
+  article as it loaded (CLS).
+
+  This hook adds, for every Markdown image:
+
+    loading="lazy"  — defers offscreen screenshots, which are the bulk of
+                       the content here
+    decoding="async"— stops large images blocking first paint on the parser
+                       main thread
+    width/height    — emitted when Hugo can resolve the file, so the browser
+                       reserves the correct box before the bytes arrive
+    class           — the same responsive rule the theme applied to content
+                       images via prose-img:*, so removing the typography
+                       plugin's image styling does not regress the layout
+
+  Width/height are only emitted for images Hugo can actually measure, i.e.
+  page-bundle resources. Screenshots under static/images/ are served as opaque
+  files and cannot be measured at build time, so they get lazy + async and
+  rely on max-w-full for their box. Moving a post's images into a page bundle
+  is what unlocks the dimensions.
+
+  An image with a title renders as <figure> with a <figcaption>; one without
+  renders as a bare <img>. Only the alt text is passed through unescaped, and
+  Goldmark has already resolved any entities in it.
+*/ -}}
+{{- $img := .Destination -}}
+{{- $res := "" -}}
+{{- /* Page-bundle images are measurable; static/ images are not. */ -}}
+{{- with .Page.Resources.GetMatch $img -}}{{- $res = . -}}{{- end -}}
+{{- $class := "mx-auto h-auto max-w-full rounded-lg border bg-transparent" -}}
+{{- with .Title -}}
+<figure class="my-6">
+  <img
+    src="{{ $img }}"
+    alt="{{ $.Text }}"
+    title="{{ . }}"
+    {{- with $res }} width="{{ .Width }}" height="{{ .Height }}"{{ end }}
+    loading="lazy"
+    decoding="async"
+    class="{{ $class }}"
+  />
+  <figcaption class="mt-2 text-center text-sm text-muted-foreground">{{ . }}</figcaption>
+</figure>
+{{- else -}}
+<img
+  src="{{ $img }}"
+  alt="{{ .Text }}"
+  {{- with $res }} width="{{ .Width }}" height="{{ .Height }}"{{ end }}
+  loading="lazy"
+  decoding="async"
+  class="{{ $class }}"
+/>
+{{- end -}}

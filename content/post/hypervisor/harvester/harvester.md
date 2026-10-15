@@ -2,7 +2,7 @@
 author = "Kishore"
 title = "Deploy Harvester HCI in VMware vSphere"
 date = "2023-12-09"
-description = ""
+description = "Deploy the Harvester hyperconverged infrastructure platform inside VMware vSphere, building a Kubernetes, KubeVirt, and Longhorn cluster that runs both containers and VMs."
 tags = [
     "Cloud",
     "HCI",
