@@ -4,11 +4,16 @@
   string → same colour on every build, no config needed. Returns the value for
   an inline style="--tag-accent: …" on the chip.
 */ -}}
-{{- $palette := slice
+<!-- {{- $palette := slice
   "oklch(55% 0.15 252)"   "oklch(55% 0.15 200)"
   "oklch(55% 0.15 165)"   "oklch(55% 0.15 145)"
   "oklch(55% 0.15 105)"   "oklch(55% 0.15 65)"
   "oklch(55% 0.15 25)"    "oklch(52% 0.14 340)" -}}
 {{- $pos := index (dict "0" 0 "1" 1 "2" 2 "3" 3 "4" 4 "5" 5 "6" 6 "7" 7 "8" 8 "9" 9
    "a" 10 "b" 11 "c" 12 "d" 13 "e" 14 "f" 15) (substr (md5 .) 0 1) -}}
+{{- index $palette (mod $pos 8) -}} -->
+
+
+{{- $palette := slice "oklch(95.0% 0.021 243.6)" "oklch(88.7% 0.063 234.3)" "oklch(74.9% 0.151 234.0)" "oklch(62.6% 0.223 239.5)" "oklch(46.0% 0.220 252.3)" "oklch(30.6% 0.170 256.4)" "oklch(20.4% 0.122 260.4)" "oklch(10.2% 0.063 263.6)" -}} 
+{{- $pos := index (dict "0" 0 "1" 1 "2" 2 "3" 3 "4" 4 "5" 5 "6" 6 "7" 7 "8" 8 "9" 9 "a" 10 "b" 11 "c" 12 "d" 13 "e" 14 "f" 15) (substr (md5 .) 0 1) -}} 
 {{- index $palette (mod $pos 8) -}}

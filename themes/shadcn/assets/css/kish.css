@@ -53,7 +53,7 @@
 
   /* Brand: ---Dark / --Neutral-Primary #002a4f, --Blue-Primary #0079ff.
      The Neutral-* ramp is alpha overlays of that navy, reproduced as-is. */
-  --background: #f3f7f8;
+  --background: #ffffff;
   --foreground: #002a4f;
   --card: #ffffff;
   --card-foreground: #002a4f;
@@ -213,4 +213,20 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Fix overflow in notice alerts on mobile */
+.alert {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.alert code,
+.alert pre {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+pre {
+  overflow-x: auto;
 }

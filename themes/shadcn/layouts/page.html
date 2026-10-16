@@ -1,7 +1,7 @@
 {{ define "main" }}
   {{- $series := .GetTerms "series" -}}
   <article
-    class="container mx-auto {{ if $series }}max-w-6xl{{ else }}max-w-4xl{{ end }} px-4 py-12 md:py-16"
+    class="container mx-auto {{ if $series }}max-w-7xl{{ else }}max-w-4xl{{ end }} px-4 py-12 md:py-16"
     data-pagefind-body
   >
     <div class="{{ if $series }}grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]{{ end }}">
