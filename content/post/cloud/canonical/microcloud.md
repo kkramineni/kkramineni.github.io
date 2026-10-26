@@ -1,4 +1,4 @@
-﻿﻿+++
++++
 author = "Kishore"
 title = "How to setup Canonical MicroCloud"
 date = "2023-12-02"

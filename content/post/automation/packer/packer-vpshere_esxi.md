@@ -1,4 +1,4 @@
-﻿﻿+++
++++
 author = "Kishore"
 title = "How to Create ESXi Template in vSphere - using Packer"
 date = "2023-11-26"

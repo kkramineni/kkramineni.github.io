@@ -1,4 +1,4 @@
-﻿+++
++++
 author = "Kishore"
 title = "Certified OpenStack Administrator (COA) — Series Roadmap & Lab"
 date = "2026-10-18"

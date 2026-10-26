@@ -1,4 +1,4 @@
-﻿﻿+++
++++
 author = "Kishore"
 title = "How to Create Rocky Linux Template in vSphere - using Packer"
 date = "2023-11-25"

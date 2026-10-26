@@ -1,4 +1,4 @@
-﻿﻿+++
++++
 author = "Kishore"
 title = "How to Create a Rocky Linux Server Template in VMware - Manual"
 date = "2023-09-23"

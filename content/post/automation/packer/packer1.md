@@ -1,4 +1,4 @@
-﻿﻿+++
++++
 title = "How to Setup Packer"
 description = "Installing Packer on Rocky Linux from the HashiCorp RPM repository, including the cracklib conflict that breaks the default package."
 date = "2023-10-20"

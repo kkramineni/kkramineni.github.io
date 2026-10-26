@@ -1,4 +1,4 @@
-﻿﻿+++
++++
 title = "How to Install and Configure Ansible AWX on Rocky Linux 8"
 description = "Deploying the AWX operator into a K3s cluster with Kustomize, then creating an AWX instance as a NodePort service."
 date = "2023-10-08"

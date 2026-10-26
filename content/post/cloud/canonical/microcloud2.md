@@ -1,4 +1,4 @@
-﻿﻿+++
++++
 author = "Kishore"
 title = "How to setup Canonical MicroCloud in VMware vSphere using OpenTofu"
 date = "2023-12-24"

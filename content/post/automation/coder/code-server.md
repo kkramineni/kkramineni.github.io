@@ -1,4 +1,4 @@
-﻿﻿+++
++++
 title = "How to Install and Configure Code-Server"
 description = "Running VS Code in a browser, with a self-signed or ADCS wildcard certificate for HTTPS."
 date = "2023-09-25"
