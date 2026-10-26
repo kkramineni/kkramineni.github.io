@@ -1,4 +1,4 @@
-+++
+﻿+++
 author = "Kishore"
 title = "Apache CloudStack Series — Learning Path & Roadmap"
 date = "2026-10-15"
@@ -41,12 +41,12 @@ The series is organised into eight parts. Read them in order if you are new to C
 |---|---|---|---|
 | 1 | [Architecture & Core Concepts](/post/cloud/acs/cloudstack-01-architecture/) | Published | Components, the zone → pod → cluster → host hierarchy, system VMs, and the object model |
 | 2 | [Installation & First Deployment](/post/cloud/acs/cloudstack-02-installation/) | Coming soon | Management server setup, hypervisor preparation, and bringing up a working zone |
-| 3 | [Networking Models](/post/cloud/acs/cloudstack-03-networking/) | Coming soon | Basic vs advanced networking, VLANs, VPCs, L2 networks, and network offerings |
-| 4 | [Storage](/post/cloud/acs/cloudstack-04-storage/) | Coming soon | Primary and secondary storage, volumes, templates, snapshots, and object storage |
-| 5 | [Virtual Machine Lifecycle](/post/cloud/acs/cloudstack-05-vm-lifecycle/) | Coming soon | Allocation strategies, deployment, management, and instance snapshots |
-| 6 | [Accounts, Projects & Service Offerings](/post/cloud/acs/cloudstack-06-accounts-offerings/) | Coming soon | Domains, accounts, users, projects, service offerings, and resource limits |
-| 7 | [API, CloudMonkey & Kubernetes](/post/cloud/acs/cloudstack-07-api-kubernetes/) | Coming soon | REST API, CloudMonkey CLI, automation patterns, and the CloudStack Kubernetes Service |
-| 8 | [Operations & Troubleshooting](/post/cloud/acs/cloudstack-08-operations/) | Coming soon | Troubleshooting, databases, usage billing, backup, GPU, webhooks, shared filesystems, and extensions |
+| 3 | Networking Models | Coming soon | Basic vs advanced networking, VLANs, VPCs, L2 networks, and network offerings |
+| 4 | Storage | Coming soon | Primary and secondary storage, volumes, templates, snapshots, and object storage |
+| 5 | Virtual Machine Lifecycle | Coming soon | Allocation strategies, deployment, management, and instance snapshots |
+| 6 | Accounts, Projects & Service Offerings | Coming soon | Domains, accounts, users, projects, service offerings, and resource limits |
+| 7 | API, CloudMonkey & Kubernetes | Coming soon | REST API, CloudMonkey CLI, automation patterns, and the CloudStack Kubernetes Service |
+| 8 | Operations & Troubleshooting | Coming soon | Troubleshooting, databases, usage billing, backup, GPU, webhooks, shared filesystems, and extensions |
 
 ## Official Documentation
 

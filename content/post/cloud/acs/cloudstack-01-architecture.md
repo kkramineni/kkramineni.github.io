@@ -78,7 +78,7 @@ The management server is a Java application (Apache Tomcat) fronted by a REST AP
 - **The admin and user web UI** and the **REST API** (plus an EC2-compatible translation layer), both on port **8080** by default.
 - **Placement logic** — the allocators that choose the cluster, host, IP address, and primary storage pool for every new VM.
 - **Event handling, alerts, and the HA manager** that restarts failed system VMs and (optionally) failed user VMs.
-- **Usage metering** for per-tenant billing data (covered in [Part 8](/post/cloud/acs/cloudstack-08-operations/)).
+- **Usage metering** for per-tenant billing data (covered in Part 8).
 
 Hypervisor hosts don't wait to be polled — they connect *out* to the management server. KVM hosts run a `cloudstack-agent` service that maintains a persistent tunnel to the management server on port **8250**; since CloudStack 4.11 a built-in certificate authority issues the certificates for agents and system VMs automatically, so no manual PKI dance is needed.
 
@@ -129,7 +129,7 @@ Two observations worth keeping in mind:
 - **OpenStack splits what CloudStack folds together.** A CloudStack zone does double duty as failure domain and network scope; OpenStack separates scheduling failure domains (availability zones) from admin grouping (host aggregates) — and has no pod tier at all.
 
 {{% notice tip "Primary vs. secondary storage, in one line each" %}}
-**Primary storage** is where VM disks live — fast, close to the hosts, scoped to a cluster (with a zone-wide option on KVM and VMware). **Secondary storage** is the zone's library — templates, ISOs, and snapshots, shared by every pod. [Part 4](/post/cloud/acs/cloudstack-04-storage/) goes deep on both, including Ceph, NFS, and the optional S3/Swift object-storage backends.
+**Primary storage** is where VM disks live — fast, close to the hosts, scoped to a cluster (with a zone-wide option on KVM and VMware). **Secondary storage** is the zone's library — templates, ISOs, and snapshots, shared by every pod. Part 4 goes deep on both, including Ceph, NFS, and the optional S3/Swift object-storage backends.
 {{% /notice %}}
 
 ## Physical Networks: Four Traffic Types
