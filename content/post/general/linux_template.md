@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 author = "Kishore"
 title = "How to Create a Rocky Linux Server Template in VMware - Manual"
 date = "2023-09-23"
@@ -84,3 +84,8 @@ dnf install open-vm-tools -y
 {{< youtube S9eJ840lFd0 >}}
 
 <br>
+
+## Related
+
+- [Windows Server template](/post/windows/m1/)
+- [Packer](/post/automation/packer/packer1/)

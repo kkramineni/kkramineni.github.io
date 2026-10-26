@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 author = "Kishore"
 title = "How to setup Canonical MicroCloud"
 date = "2023-12-02"
@@ -133,4 +133,7 @@ sudo systemctl reload snap.lxd.daemon
 ![img placeholder](/images/microcloud/022_micro.png " ")
 ![img placeholder](/images/microcloud/023_micro.png " ")
 
+## Related
 
+- [MicroStack](/post/cloud/canonical/microstack/)
+- [MicroCloud (part 2)](/post/cloud/canonical/microcloud2/)

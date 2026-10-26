@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 author = "Kishore"
 title = "Deploy Harvester HCI in VMware vSphere"
 date = "2023-12-09"
@@ -143,4 +143,7 @@ Complete the following steps to add additional nodes to the exisint cluster:
 
 <br>
 
+## Related
 
+- [k3s](/post/containers/k3s/k3s-01/)
+- [MicroCloud](/post/cloud/canonical/microcloud/)

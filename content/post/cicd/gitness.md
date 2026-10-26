@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 author = "Kishore"
 title = "Getting sterted with Gitness"
 date = "2024-01-01"
@@ -88,3 +88,8 @@ In my case, i will be accessing using http://gitness.cloudbricks.local:3000
 {{< youtube zT8__ngMwos >}}
 
 <br>
+
+## Related
+
+- [G](i)
+- [/](p)

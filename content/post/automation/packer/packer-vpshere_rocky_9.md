@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 author = "Kishore"
 title = "How to Create Rocky Linux Template in vSphere - using Packer"
 date = "2023-11-25"
@@ -716,3 +716,8 @@ it took, approximately 13 minutes for me to complete the template creation
 {{< youtube lcbUSPeDNSI >}}
 
 <br>
+
+## Related
+
+- [P](a)
+- [/](p)

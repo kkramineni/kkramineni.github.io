@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 title = "How to Create Images/Templates/VMs in vSphere - using Packer"
 description = "A reference of the Linux, Windows, and ESXi builds covered in this Packer series, and the HCL file structure they share."
 date = "2023-11-24"
@@ -47,3 +47,8 @@ All the templates in this series share the same file structure, and each build d
 | :--------------- | :------ |
 | VMware ESXi      | 7       |
 | VMware ESXi      | 8       |
+
+## Related
+
+- [P](a)
+- [/](p)

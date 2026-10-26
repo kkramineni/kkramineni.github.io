@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 author = "Kishore"
 title = "Installation of Kubernetes and KubeSphere on Linux"
 date = "2024-01-01"
@@ -109,3 +109,8 @@ Wait for the changes to reflect, and relogin to the console to check App store
 {{< youtube V6GTwZ8TWKU >}}
 
 <br>
+
+## Related
+
+- [k](3)
+- [/](p)

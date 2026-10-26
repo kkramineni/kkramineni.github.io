@@ -1,4 +1,4 @@
-﻿+++
+﻿﻿+++
 author = "Kishore"
 title = "Apache CloudStack Series — Learning Path & Roadmap"
 date = "2026-10-15"
@@ -40,7 +40,7 @@ The series is organised into eight parts. Read them in order if you are new to C
 | # | Post | Status | What it covers |
 |---|---|---|---|
 | 1 | [Architecture & Core Concepts](/post/cloud/acs/cloudstack-01-architecture/) | Published | Components, the zone → pod → cluster → host hierarchy, system VMs, and the object model |
-| 2 | [Installation & First Deployment](/post/cloud/acs/cloudstack-02-installation/) | Coming soon | Management server setup, hypervisor preparation, and bringing up a working zone |
+| 2 | [Installation & First Deployment](/post/cloud/acs/cloudstack-02-installation/) | Published | Management server setup, hypervisor preparation, and bringing up a working zone |
 | 3 | Networking Models | Coming soon | Basic vs advanced networking, VLANs, VPCs, L2 networks, and network offerings |
 | 4 | Storage | Coming soon | Primary and secondary storage, volumes, templates, snapshots, and object storage |
 | 5 | Virtual Machine Lifecycle | Coming soon | Allocation strategies, deployment, management, and instance snapshots |

@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 author = "Kishore"
 title = "How to Install and Configure  GitLab Community Edition"
 date = "2024-01-06"
@@ -131,3 +131,7 @@ gitlab-ctl reconfigure
 
 <br>
 
+## Related
+
+- [G](i)
+- [/](p)

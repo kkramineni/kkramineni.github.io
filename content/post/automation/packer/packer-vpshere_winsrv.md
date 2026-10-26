@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 author = "Kishore"
 title = "How to Create Windows Server 2022 Template in vSphere - using Packer"
 date = "2023-11-26"
@@ -1180,3 +1180,8 @@ it took, approximately 12 minutes for me to complete the template creation
 {{< youtube JMnlszX9B54 >}}
 
 <br>
+
+## Related
+
+- [P](a)
+- [/](p)

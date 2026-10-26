@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 author = "Kishore"
 title = "How to setup Canonical MicroCloud in VMware vSphere using OpenTofu"
 date = "2023-12-24"
@@ -421,5 +421,7 @@ lxc profile show default
 ![img placeholder](/images/microcloud/015_micro.png " ")
 4. After setting up the certificates, you can start creating instances, editing profiles, etc.
 
+## Related
 
-
+- [MicroCloud](/post/cloud/canonical/microcloud/)
+- [MicroStack](/post/cloud/canonical/microstack/)

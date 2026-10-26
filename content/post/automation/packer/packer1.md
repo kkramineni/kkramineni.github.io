@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 title = "How to Setup Packer"
 description = "Installing Packer on Rocky Linux from the HashiCorp RPM repository, including the cracklib conflict that breaks the default package."
 date = "2023-10-20"
@@ -80,3 +80,8 @@ See the [official Packer documentation](https://developer.hashicorp.com/packer/d
 ---
 
 *Packer and the HashiCorp toolchain are HashiCorp products; this post is our own notes from a Rocky Linux lab install.*
+
+## Related
+
+- [O](p)
+- [/](p)

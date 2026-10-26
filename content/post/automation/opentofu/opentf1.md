@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 title = "How to Setup OpenTofu"
 description = "Installing OpenTofu from the GitHub release RPM and walking through the write, plan, and apply workflow."
 date = "2023-11-06"
@@ -81,3 +81,8 @@ The RPM command in this post pins an early alpha (`v1.6.0-alpha3`). OpenTofu has
 ---
 
 *OpenTofu is a Linux Foundation project; this post is our own notes from a Rocky Linux lab install.*
+
+## Related
+
+- [P](a)
+- [/](p)

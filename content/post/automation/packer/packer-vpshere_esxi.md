@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 author = "Kishore"
 title = "How to Create ESXi Template in vSphere - using Packer"
 date = "2023-11-26"
@@ -643,3 +643,8 @@ it took, approximately 6 minutes for me to complete the template creation
 {{< youtube v4YSqpftF5k >}}
 
 <br>
+
+## Related
+
+- [P](a)
+- [/](p)

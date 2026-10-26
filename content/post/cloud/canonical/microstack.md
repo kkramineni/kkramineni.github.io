@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 author = "Kishore"
 title = "How to setup microstack openstack"
 date = "2023-12-28"
@@ -132,4 +132,7 @@ sudo systemctl reload snap.lxd.daemon
 ![img placeholder](/images/microcloud/022_micro.png " ")
 ![img placeholder](/images/microcloud/023_micro.png " ")
 
+## Related
 
+- [MicroCloud](/post/cloud/canonical/microcloud/)
+- [MicroCloud (part 2)](/post/cloud/canonical/microcloud2/)

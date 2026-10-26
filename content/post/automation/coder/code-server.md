@@ -1,4 +1,4 @@
-+++
+﻿﻿+++
 title = "How to Install and Configure Code-Server"
 description = "Running VS Code in a browser, with a self-signed or ADCS wildcard certificate for HTTPS."
 date = "2023-09-25"
@@ -68,3 +68,17 @@ I created a wildcard SSL certificate in ADCS for other requirements where SSL en
 How to install code-server, generate a wildcard SSL certificate, and use it with code-server:
 
 {{< youtube u7AK-Fk4JRE >}}
+
+## Running it safely
+
+code-server is powerful and dangerous if exposed carelessly: it is a full shell and file system behind a password.
+
+- **Bind address.** `bind-addr: 0.0.0.0:8080` exposes it to the network. That is fine inside a lab; on anything reachable from the internet, put it behind a reverse proxy (nginx or Caddy) with TLS and real authentication instead.
+- **Certificate.** `cert: true` generates a self-signed certificate, which browsers will warn about. For a lab that is acceptable; for anything shared, use a real certificate (the ADCS wildcard in this post, or Let's Encrypt via the reverse proxy).
+- **Password.** The config stores it in plain text. Treat the file as a secret and do not commit it.
+- **Updates.** code-server moves fast. Re-run the install script periodically, or pin a version and upgrade deliberately.
+
+## Related
+
+- [Ansible + AWX](/post/automation/ansible/ansible1/)
+- [Packer](/post/automation/packer/packer1/)
